@@ -15,7 +15,6 @@ public class UtilComum {
 	}
 	
 	public static boolean isEndereco(String endereco) {
-		String teste = "";
 		return true;
 	}
 	
