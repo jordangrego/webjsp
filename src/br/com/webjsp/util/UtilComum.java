@@ -10,4 +10,8 @@ public class UtilComum {
 		return false;
 	}
 	
+	public static boolean isFax(String fax) {
+		return false;
+	}
+	
 }
