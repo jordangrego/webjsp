@@ -6,4 +6,8 @@ public class UtilComum {
 		return false;
 	}
 	
+	public static boolean isTelefone(String telefone) {
+		return false;
+	}
+	
 }
