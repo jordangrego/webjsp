@@ -14,4 +14,8 @@ public class UtilComum {
 		return false;
 	}
 	
+	public static boolean isEndereco(String endereco) {
+		return false;
+	}
+	
 }
