@@ -6,17 +6,13 @@
 
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<h3 class="panel-title">Pesquisa Tipo de Dado</h3>
+		<h3 class="panel-title">Pesquisa Lote</h3>
 	</div>
 	<div class="panel-body">
 		<form class="form-inline">
 			<div class="form-group">
-				<label>Razão Social</label> <input type="text" class="form-control"
-					id="txtRazaoSocial" />
-			</div>
-			<div class="form-group">
-				<label>CNPJ</label> <input type="text" class="form-control"
-					id="txtCnpj" />
+				<label>Número do Lote</label> <input type="text" class="form-control numero"
+					id="txtNumeroLote" />
 			</div>
 			<button id="btnPesquisar" type="button" class="btn btn-primary pull-right">Pesquisar</button>
 		</form>
@@ -32,6 +28,7 @@
 			<th>Número do lote</th>
 			<th>Quantidade de Caixas</th>
 			<th>Data de Recebimento</th>
+			<th>Observação</th>
 			<th></th>
 			<!-- <th class="filter-select filter-exact"
 				data-placeholder="Pick a gender">Sex</th>-->

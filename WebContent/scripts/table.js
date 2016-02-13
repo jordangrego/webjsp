@@ -13,11 +13,9 @@ $(function() {
 function pesquisarLotes() {
 	removeRows();
 
-	var observacao = "";
-
 	$.ajax({
 		url : "/webjsp/PesquisarLotesServlet",
-		data : "observacao=" + observacao,
+		data : "numero_lote=" + $('#txtNumeroLote').val(),
 		dataType : "json",
 		type : "GET",
 		success : function(data) {
@@ -28,6 +26,7 @@ function pesquisarLotes() {
 				newRowContent += "<td>" + row.numerolote + "</td>";
 				newRowContent += "<td>" + row.qtdCaixas + "</td>";
 				newRowContent += "<td>" + row.dataRecebimento + "</td>";
+				newRowContent += "<td>" + row.observacao + "</td>";
 				newRowContent += "<td class='tdCenter'><button type='button' class='btn btn-default btn-sm'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></button></td>";
 				newRowContent += "</tr>";
 

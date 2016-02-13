@@ -28,10 +28,6 @@ public class PesquisarLotesServlet extends HttpServlet {
 				loteCriterio.setNumeroLote(Integer.parseInt(request.getParameter("numero_lote")));
 			}
 			
-			if (request.getParameter("observacao") != null && !request.getParameter("observacao").equals("")) {
-				loteCriterio.setObservacao(request.getParameter("observacao"));
-			}
-			
 			List<Lote> listaLote = new LoteBll().pesquisar(loteCriterio);
 			
 			
