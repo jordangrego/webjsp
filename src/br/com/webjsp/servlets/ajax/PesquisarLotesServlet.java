@@ -59,7 +59,7 @@ public class PesquisarLotesServlet extends HttpServlet {
 				retorno.append("\"" + lote.getQtdCaixa() + "\",");
 				
 				retorno.append("\"observacao\":");
-				retorno.append("\"" + lote.getObservacao().replace("\n", "").replace("\r", "") + "\",");
+				retorno.append("\"" + (lote.getObservacao() != null ? lote.getObservacao().replace("\n", "").replace("\r", "") : "") + "\",");
 				
 				retorno.append("\"dataRecebimento\":");
 				retorno.append("\"" + lote.getDataRecebimento() + "\"");
@@ -76,7 +76,6 @@ public class PesquisarLotesServlet extends HttpServlet {
 			
 			PrintWriter out = response.getWriter();
 			out.println(retorno.toString());
-			System.out.println(retorno.toString());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

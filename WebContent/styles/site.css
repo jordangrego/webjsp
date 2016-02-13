@@ -1,0 +1,39 @@
+/* fundo modal */
+* {
+	border: 0;
+	margin: 0
+}
+
+.ui-widget-overlay {
+	background: repeat-x scroll 50% 50% #AAA;
+	opacity: 0.3;
+}
+
+.ui-widget-overlay {
+	height: 100%;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 100%;
+}
+
+/* ajax load */
+#divLoading {
+	display: none; 
+	position: fixed; /* or absolute */ 
+	top: 50%; 
+	left: 50%;
+}
+
+#fundoModal {
+	display: none;
+}
+
+/* filtros do tablesorter */
+.tablesorter-filter-row {
+	display: none;
+}
+
+.tdCenter {
+	text-align: center;
+}
