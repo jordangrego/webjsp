@@ -6,6 +6,7 @@
 <%@ include file="scripts.jsp"%>
 </head>
 <body>
+	<%@ include file="seguranca.jsp"%>
 	<%@ include file="menu.jsp"%>
 	<div class="container">
 		<div id="fundoModal" class="ui-widget-overlay ui-front"></div>

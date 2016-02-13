@@ -30,5 +30,62 @@ $(function() {
             else return true;
         }
     });
+    
+    executaGrid();
 
 });
+
+
+function executaGrid() {
+	$('.grid').each(function(i, obj) {
+	    $(this).tablesorter({
+			theme : "bootstrap",
+			widthFixed : true,
+			headerTemplate : '{content} {icon}', // new in v2.7. Needed to add
+			widgets : [ "uitheme", "filter", "zebra" ],
+			widgetOptions : {
+				zebra : [ "even", "odd" ],
+				filter_reset : ".reset",
+				filter_cssFilter : "form-control",
+			}
+		}).tablesorterPager({
+			container : $(".ts-pager"),
+			headers : {
+				0 : {
+					filter : false
+				}
+			},
+			cssGoto : ".pagenum",
+			removeRows : false,
+			output : '{startRow}' // '{startRow} - {endRow} / {filteredRows} ({totalRows})'
+		});
+	});
+}
+
+
+/* TABLE SORTER -----------------------------------------------------------------------------------------*/
+//NOTE: $.tablesorter.theme.bootstrap is ALREADY INCLUDED in the jquery.tablesorter.widgets.js
+// file; it is included here to show how you can modify the default classes
+$.tablesorter.themes.bootstrap = {
+	// these classes are added to the table. To see other table classes available,
+	// look here: http://getbootstrap.com/css/#tables
+	table : 'table table-bordered table-striped',
+	caption : 'caption',
+	// header class names
+	header : 'bootstrap-header', // give the header a gradient background (theme.bootstrap_2.css)
+	sortNone : '',
+	sortAsc : '',
+	sortDesc : '',
+	active : '', // applied when column is sorted
+	hover : '', // custom css required - a defined bootstrap style may not override other classes
+	// icon class names
+	icons : '', // add "icon-white" to make them white; this icon class is added to the <i> in the header
+	iconSortNone : 'bootstrap-icon-unsorted', // class name added to icon when column is not sorted
+	iconSortAsc : 'glyphicon glyphicon-chevron-up', // class name added to icon when column has ascending sort
+	iconSortDesc : 'glyphicon glyphicon-chevron-down', // class name added to icon when column has descending sort
+	filterRow : '', // filter row class; use widgetOptions.filter_cssFilter for the input/select element
+	footerRow : '',
+	footerCells : '',
+	even : '', // even row zebra striping
+	odd : '' // odd row zebra striping
+};

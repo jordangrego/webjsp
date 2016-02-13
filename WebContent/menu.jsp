@@ -1,3 +1,5 @@
+<%@ page import="br.com.webjsp.entidade.Usuario"%>
+<script type="text/javascript" src="scripts/menu.js"></script>
 <nav class="navbar navbar-default">
 	<div class="container-fluid">
 		<div class="navbar-header">
@@ -10,9 +12,15 @@
 			</button>
 			<a class="navbar-brand" href="/webjsp/index.jsp">JSP - Postgre</a>
 		</div>
+
+		<%
+			Usuario usuarioLogado = (Usuario) session.getAttribute("usuario");
+			if (usuarioLogado != null) {
+		%>
+
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="/webjsp/index.jsp">Home</a></li>
+				<li class="active"><a href="/webjsp/main.jsp">Home</a></li>
 				<li><a href="/webjsp/table.jsp">Tabela</a></li>
 				<!-- menu com drop
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -29,15 +37,24 @@
 					</ul></li>
 					 -->
 			</ul>
-			<!-- menu a direita
+			<form id="formLogOff" action="/webjsp/logoff.jsp" method="post" /> 
 			<ul class="nav navbar-nav navbar-right">
-				<li class="active"><a href="./">Default <span
-						class="sr-only">(current)</span></a></li>
-				<li><a href="../navbar-static-top/">Static top</a></li>
-				<li><a href="../navbar-fixed-top/">Fixed top</a></li>
+				<li class="active"><a href="#"><span class="glyphicon glyphicon-user"></span> <%=usuarioLogado.getLogin().toUpperCase()%></a></li>
+				<li><a href="#"><span id="spanLogOff" class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></li>
 			</ul>
-			 -->
+			</form>
 		</div>
+
+
+
+
+		<%
+			} else {
+		%>
+
+		<%
+			}
+		%>
 		<!--/.nav-collapse -->
 	</div>
 	<!--/.container-fluid -->

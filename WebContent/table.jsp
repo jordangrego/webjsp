@@ -19,7 +19,7 @@
 	</div>
 </div>
 
-<table id="tblEstudante">
+<table id="tblEstudante" class="grid">
 	<!-- bootstrap classes added by the uitheme widget -->
 	<thead>
 	<!--  -->
