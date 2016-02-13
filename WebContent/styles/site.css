@@ -37,3 +37,7 @@
 .tdCenter {
 	text-align: center;
 }
+
+.divRetorno {
+	display: none;
+}

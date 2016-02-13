@@ -60,4 +60,5 @@
 	<tbody>
 	</tbody>
 </table>
+<div id="divRetornoLotes" class="alert alert-warning divRetorno" role="alert">Nenhum Registro Encontrado.</div>
 <%@ include file="fundo.jsp"%>

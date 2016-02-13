@@ -2,9 +2,8 @@ $(function() {
 
 	executarSorter();
 	$("#tblEstudante").hide();
-
+	
 	$('#btnPesquisar').click(function() {
-		$("#tblEstudante").show();
 		pesquisarLotes();
 	});
 
@@ -12,7 +11,7 @@ $(function() {
 
 function pesquisarLotes() {
 	removeRows();
-
+	
 	$.ajax({
 		url : "/webjsp/PesquisarLotesServlet",
 		data : "numero_lote=" + $('#txtNumeroLote').val(),
@@ -31,13 +30,24 @@ function pesquisarLotes() {
 				newRowContent += "</tr>";
 
 				$("#tblEstudante tbody").append(newRowContent);
-
 			});
 
 			$("#tblEstudante").trigger("update");
+			controlaApresentacao();
 		}
 	});
+	
+}
 
+function controlaApresentacao() {
+	console.log($("#tblEstudante > tbody > tr").length);
+	if ($("#tblEstudante > tbody > tr").length > 0) {		
+		$("#divRetornoLotes").hide();
+		$("#tblEstudante").show();
+	} else {
+		$("#divRetornoLotes").show();
+		$("#tblEstudante").hide();
+	}
 }
 
 function removeRows() {
