@@ -75,4 +75,21 @@ $(function() {
 
   });
 
+  pesquisarLotes('a');
 });
+
+function pesquisarLotes(observacao) {
+	$.ajax({
+		url : "/webjsp/PesquisarLotesServlet",
+		data : "observacao=" + observacao,
+		dataType : "json",
+		type : "GET",
+		success : function(data) {
+			
+			$.each(data, function(index, row) {
+				console.log('id:' + row.idLote + " | observacao: " + row.observacao);
+			});
+			
+		}
+	});
+}

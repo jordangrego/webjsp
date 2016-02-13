@@ -11,8 +11,16 @@
 		<servlet-name>listaCidadeServlet</servlet-name>
 		<servlet-class>br.com.webjsp.servlets.ajax.ListaCidadesServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>pesquisarLotesServlet</servlet-name>
+		<servlet-class>br.com.webjsp.servlets.ajax.PesquisarLotesServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>listaCidadeServlet</servlet-name>
 		<url-pattern>/ListaCidadesServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>pesquisarLotesServlet</servlet-name>
+		<url-pattern>/PesquisarLotesServlet</url-pattern>
 	</servlet-mapping>
 </web-app>

@@ -7,5 +7,5 @@
 <script type="text/javascript"
 	src="scripts/jquery.tablesorter.widgets.js"></script>
 <script type="text/javascript" src="scripts/jquery.tablesorter.pager.js"></script>
-
+<script type="text/javascript" src="scripts/site.js"></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>

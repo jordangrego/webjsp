@@ -1,18 +1,36 @@
-package br.com.webjsp;
+package br.com.webjsp.servlets.ajax;
 
-import java.sql.SQLException;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import br.com.webjsp.entidade.Lote;
 import br.com.webjsp.negocio.LoteBll;
 
-public class Principal {
-	public static void main(String[] args) throws SQLException {
-		
+public class PesquisarLotesServlet extends HttpServlet {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8987603985671092775L;
+
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		try {
 			Lote loteCriterio = new Lote();
-		
-			loteCriterio.setObservacao("a");
 			
+			if (request.getParameter("numero_lote") != null && !request.getParameter("numero_lote").equals("")) {
+				loteCriterio.setNumeroLote(Integer.parseInt(request.getParameter("numero_lote")));
+			}
+			
+			if (request.getParameter("observacao") != null && !request.getParameter("observacao").equals("")) {
+				loteCriterio.setObservacao(request.getParameter("observacao"));
+			}
 			
 			List<Lote> listaLote = new LoteBll().pesquisar(loteCriterio);
 			
@@ -56,6 +74,12 @@ public class Principal {
 			
 			retorno.append("]");
 			
+			PrintWriter out = response.getWriter();
+			out.println(retorno.toString());
 			System.out.println(retorno.toString());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
