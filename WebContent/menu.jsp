@@ -1,5 +1,5 @@
 <%@ page import="br.com.webjsp.entidade.Usuario"%>
-<script type="text/javascript" src="scripts/menu.js"></script>
+<script type="text/javascript" src="/webjsp/scripts/menu.js"></script>
 <nav class="navbar navbar-default">
 	<div class="container-fluid">
 		<div class="navbar-header">
@@ -22,25 +22,27 @@
 			<ul class="nav navbar-nav">
 				<li><a href="/webjsp/main.jsp">Home</a></li>
 				<li><a href="/webjsp/table.jsp">Tabela</a></li>
-				<!-- menu com drop
+
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-haspopup="true"
-					aria-expanded="false">Dropdown <span class="caret"></span></a>
+					aria-expanded="false">Cadastros <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="#">Action</a></li>
-						<li><a href="#">Another action</a></li>
-						<li><a href="#">Something else here</a></li>
+						<li><a href="/webjsp/lote/lotePesquisa.jsp">Lotes</a></li>
+						<!-- 
 						<li role="separator" class="divider"></li>
 						<li class="dropdown-header">Nav header</li>
 						<li><a href="#">Separated link</a></li>
 						<li><a href="#">One more separated link</a></li>
+						 -->
 					</ul></li>
-					 -->
+
 			</ul>
-			<form id="formLogOff" action="/webjsp/logoff.jsp" method="post" /> 
+			<form id="formLogOff" action="/webjsp/logoff.jsp" method="post" />
 			<ul class="nav navbar-nav navbar-right">
-				<li class="active"><a href="#"><span class="glyphicon glyphicon-user"></span> <%=usuarioLogado.getLogin().toUpperCase()%></a></li>
-				<li><a href="#"><span id="spanLogOff" class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></li>
+				<li class="active"><a href="#"><span
+						class="glyphicon glyphicon-user"></span> <%=usuarioLogado.getLogin().toUpperCase()%></a></li>
+				<li><a href="#"><span id="spanLogOff"
+						class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></li>
 			</ul>
 			</form>
 		</div>

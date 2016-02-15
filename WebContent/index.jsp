@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ include file="topo.jsp"%>
+<%@ include file="/topo.jsp"%>
 <%@ page import="br.com.webjsp.entidade.Usuario, 
 				br.com.webjsp.negocio.UsuarioBll, 
 				br.com.webjsp.exceptions.WebJspException" %>
@@ -30,7 +30,7 @@
 
 
 
-<script type="text/javascript" src="scripts/index.js"></script>
+<script type="text/javascript" src="/webjsp/scripts/index.js"></script>
 
 
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -82,4 +82,4 @@
 
 
 
-<%@ include file="fundo.jsp"%>
+<%@ include file="/fundo.jsp"%>
