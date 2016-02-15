@@ -1,8 +1,9 @@
 $(function() {
 
-	$("#tblEstudante").hide();
+	$("#tblLotes").hide();
 
 	$('#btnPesquisar').click(function() {
+		$("#tblLotes").hide();
 		pesquisarLotes();
 	});
 
@@ -36,11 +37,11 @@ function pesquisarLotes() {
 										newRowContent += "<td class='tdCenter'><button type='button' class='btn btn-default btn-sm'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></button></td>";
 										newRowContent += "</tr>";
 
-										$("#tblEstudante tbody").append(
+										$("#tblLotes tbody").append(
 												newRowContent);
 									});
 
-					$("#tblEstudante").trigger("update");
+					$("#tblLotes").trigger("update");
 					controlaApresentacao();
 				}
 			});
@@ -48,16 +49,16 @@ function pesquisarLotes() {
 }
 
 function controlaApresentacao() {
-	console.log($("#tblEstudante > tbody > tr").length);
-	if ($("#tblEstudante > tbody > tr").length > 0) {
+	console.log($("#tblLotes > tbody > tr").length);
+	if ($("#tblLotes > tbody > tr").length > 0) {
 		$("#divRetornoLotes").hide();
-		$("#tblEstudante").show();
+		$("#tblLotes").show();
 	} else {
 		$("#divRetornoLotes").show();
-		$("#tblEstudante").hide();
+		$("#tblLotes").hide();
 	}
 }
 
 function removeRows() {
-	$("#tblEstudante > tbody > tr").remove();
+	$("#tblLotes > tbody > tr").remove();
 }

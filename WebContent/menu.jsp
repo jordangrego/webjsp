@@ -20,7 +20,7 @@
 
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="/webjsp/main.jsp">Home</a></li>
+				<li><a href="/webjsp/main.jsp">Home</a></li>
 				<li><a href="/webjsp/table.jsp">Tabela</a></li>
 				<!-- menu com drop
 				<li class="dropdown"><a href="#" class="dropdown-toggle"

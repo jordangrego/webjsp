@@ -1,8 +1,9 @@
 $(function() {
 
-	$("#tblEstudante").hide();
+	
 
 	$('#btnPesquisar').click(function() {
+		$("#tblEstudante").hide();
 		pesquisarLotes();
 	});
 
