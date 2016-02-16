@@ -7,12 +7,8 @@ $(function() {
 		pesquisarLotes();
 	});
 	
-	$(function() {
-
-		$('#btnCadastrar').click(function() {
-			$(window).attr('location','/webjsp/lote/loteFormulario.jsp')
-		});
-
+	$('#btnCadastrar').click(function() {
+		$(window).attr('location','/webjsp/lote/loteFormulario.jsp')
 	});
 
 });

@@ -25,8 +25,15 @@
 				</div>
 
 			</div>
+			<div class="form-group row">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<label>Observação</label> <textarea class="form-control" rows="3" id="txtObservacao"></textarea>
 
-			<div class="form-group row btn-toolbar">
+				</div>
+
+			</div>
+
+			<div class="btn-toolbar">
 				<button id="btnSalvar" type="button"
 					class="btn btn-primary pull-right">Salvar</button>
 				<button id="btnCancelar" type="button"

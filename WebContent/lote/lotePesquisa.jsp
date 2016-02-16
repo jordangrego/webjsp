@@ -15,12 +15,11 @@
 				<label>Número do Lote</label> <input type="text"
 					class="form-control numero" id="txtNumeroLote" />
 			</div>
-			<div class="btn-toolbar">
 				<button id="btnCadastrar" type="button"
-					class="btn btn-default pull-right">Cadastrar</button>
+					class="btn btn-default">Cadastrar</button>
 				<button id="btnPesquisar" type="button"
-					class="btn btn-primary pull-right">Pesquisar</button>
-			</div>
+					class="btn btn-primary">Pesquisar</button>
+			
 		</form>
 	</div>
 </div>
