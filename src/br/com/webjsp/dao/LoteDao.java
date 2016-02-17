@@ -3,7 +3,9 @@ package br.com.webjsp.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.text.SimpleDateFormat;
 
 import br.com.webjsp.entidade.Lote;
 
@@ -18,34 +20,39 @@ public class LoteDao extends AbstractDao {
 	 * @throws SQLException
 	 */
 	public void inserir(Lote lote) throws SQLException {
-		/*
-		this.comandoSQL = conexao.prepareStatement("INSERT INTO public.tipo_dado (id_tipo_dado, descricao_tipo) VALUES ((SELECT NEXTVAL('public.tipo_dado_id_tipo_dado_seq')), '" + lote.getDescricaoTipoDado() + "');");
-		comandoSQL.execute();
+		Date data = new Date(System.currentTimeMillis());  
+		SimpleDateFormat formatarDate = new SimpleDateFormat("yyyy-MM-dd"); 
 		
-		this.comandoSQL = conexao.prepareStatement("SELECT id_tipo_dado, descricao_tipo FROM public.tipo_dado order by id_tipo_dado desc limit 1");
+		this.comandoSQL = conexao.prepareStatement("INSERT INTO public.lote(id_lote, id_cliente, id_usuario, numero_lote, data_recebimento, qtd_caixa, observacao) VALUES (NEXTVAL('lote_id_lote_seq'), 3, 1, '" + lote.getNumeroLote() + "', '" + formatarDate.format(data) +"', '" + lote.getQtdCaixa() + "', '" + lote.getObservacao() + "');");
+		comandoSQL.execute();																																							
+		
+		/*this.comandoSQL = conexao.prepareStatement("SELECT id_tipo_dado, descricao_tipo FROM public.tipo_dado order by id_tipo_dado desc limit 1");
 		ResultSet resultadoSql = comandoSQL.executeQuery();
 		
 		while (resultadoSql.next()) {
 			lote.setIdTipoDado(Integer.parseInt(resultadoSql.getString(1)));
 			lote.setDescricaoTipoDado(resultadoSql.getString(2).toString());
-		}
-		*/
+		}*/
 	}
 
 	/**
 	 * Altera o Registro.
+	 * 
 	 * @param lote
 	 * @throws SQLException
 	 */
 	public void alterar(Lote lote) throws SQLException {
 		/*
-		this.comandoSQL = conexao.prepareStatement("UPDATE public.tipo_dado set descricao_tipo = '" + lote.getDescricaoTipoDado() + "' where id_tipo_dado = " + lote.getIdTipoDado());
-		comandoSQL.execute();
-		*/
+		 * this.comandoSQL = conexao.prepareStatement(
+		 * "UPDATE public.tipo_dado set descricao_tipo = '" +
+		 * lote.getDescricaoTipoDado() + "' where id_tipo_dado = " +
+		 * lote.getIdTipoDado()); comandoSQL.execute();
+		 */
 	}
 
 	/**
 	 * Deleta registro com o Id passado.
+	 * 
 	 * @param idLote
 	 * @throws SQLException
 	 */
@@ -56,6 +63,7 @@ public class LoteDao extends AbstractDao {
 
 	/**
 	 * Recupera um �nico TipoDado pelo Id.
+	 * 
 	 * @param idLote
 	 * @return
 	 * @throws SQLException
@@ -63,7 +71,9 @@ public class LoteDao extends AbstractDao {
 	public Lote recuperar(int idLote) throws SQLException {
 		Lote loteRetorno = null;
 
-		this.comandoSQL = conexao.prepareStatement("SELECT id_lote, id_cliente, id_usuario, numero_lote, data_recebimento, qtd_caixa, observacao FROM lote where id_lote = " + idLote);
+		this.comandoSQL = conexao.prepareStatement(
+				"SELECT id_lote, id_cliente, id_usuario, numero_lote, data_recebimento, qtd_caixa, observacao FROM lote where id_lote = "
+						+ idLote);
 		ResultSet resultadoSql = comandoSQL.executeQuery();
 
 		while (resultadoSql.next()) {
@@ -81,7 +91,9 @@ public class LoteDao extends AbstractDao {
 	}
 
 	/**
-	 * Pesquisa TipoDado usando o parametro tipoDadoCriterio como crit�rio de consulta.
+	 * Pesquisa TipoDado usando o parametro tipoDadoCriterio como crit�rio de
+	 * consulta.
+	 * 
 	 * @param loteCriterio
 	 * @return
 	 * @throws SQLException
@@ -91,25 +103,25 @@ public class LoteDao extends AbstractDao {
 
 		StringBuilder sql = new StringBuilder();
 
-		sql.append("SELECT id_lote, id_cliente, id_usuario, numero_lote, data_recebimento, qtd_caixa, observacao FROM lote where ");
+		sql.append(
+				"SELECT id_lote, id_cliente, id_usuario, numero_lote, data_recebimento, qtd_caixa, observacao FROM lote where ");
 
-		
 		if (loteCriterio.getIdLote() > 0) {
 			sql.append(" id_lote = " + loteCriterio.getIdLote() + " AND ");
 		}
-		
+
 		if (loteCriterio.getIdCliente() > 0) {
 			sql.append(" id_cliente = " + loteCriterio.getIdCliente() + " AND ");
 		}
-		
+
 		if (loteCriterio.getIdUsuario() > 0) {
 			sql.append(" id_usuario = " + loteCriterio.getIdUsuario() + " AND ");
 		}
-		
+
 		if (loteCriterio.getNumeroLote() > 0) {
 			sql.append(" numero_lote = " + loteCriterio.getNumeroLote() + " AND ");
 		}
-		
+
 		if (loteCriterio.getQtdCaixa() > 0) {
 			sql.append(" qtd_caixa = " + loteCriterio.getQtdCaixa() + " AND ");
 		}
