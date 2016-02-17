@@ -28,13 +28,16 @@
 					aria-expanded="false">Cadastros <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="/webjsp/lote/lotePesquisa.jsp">Lotes</a></li>
+						<li><a href="/webjsp/cliente/clientePesquisa.jsp">Clientes</a></li>
 						<!-- 
 						<li role="separator" class="divider"></li>
 						<li class="dropdown-header">Nav header</li>
 						<li><a href="#">Separated link</a></li>
 						<li><a href="#">One more separated link</a></li>
 						 -->
-					</ul></li>
+					</ul>
+					
+					</li>
 
 			</ul>
 			<form id="formLogOff" action="/webjsp/logoff.jsp" method="post" />
