@@ -29,6 +29,7 @@
 					<ul class="dropdown-menu">
 						<li><a href="/webjsp/lote/lotePesquisa.jsp">Lotes</a></li>
 						<li><a href="/webjsp/cliente/clientePesquisa.jsp">Clientes</a></li>
+						<li><a href="/webjsp/usuario/usuarioPesquisa.jsp">Usuários</a></li>
 						<!-- 
 						<li role="separator" class="divider"></li>
 						<li class="dropdown-header">Nav header</li>

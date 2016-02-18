@@ -46,7 +46,7 @@ public class ManterClientesServlet extends HttpServlet {
 				retorno.append("\"" + cliente.getRazaoSocial() + "\",");
 				
 				retorno.append("\"email\":");
-				retorno.append("\"" + cliente.getEmailCliente() != null ? cliente.getEmailCliente() : "-" + "\",");
+				retorno.append("\"" + (cliente.getEmailCliente() != null ? cliente.getEmailCliente() : "") + "\"");
 				
 				retorno.append("}");
 				

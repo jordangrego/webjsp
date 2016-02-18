@@ -91,6 +91,7 @@ public class ClienteDao extends AbstractDao {
 			clienteRetorno.setIdUsuario(resultadoSql.getInt("id_usuario"));
 			clienteRetorno.setRazaoSocial(resultadoSql.getString("razao_social"));
 			clienteRetorno.setCnpj(resultadoSql.getString("cnpj"));
+			clienteRetorno.setEmailCliente(resultadoSql.getString("email_cliente"));
 			clienteRetorno.setDataHora(resultadoSql.getDate("data_hora"));
 			clienteRetorno.setQtdCaixaPadrao(resultadoSql.getInt("qtd_caixa_padrao"));
 			clienteRetorno.setExisteCaixaTriplex(resultadoSql.getBoolean("existe_caixa_triplex"));

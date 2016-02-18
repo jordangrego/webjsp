@@ -1,6 +1,7 @@
 package br.com.webjsp.negocio;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import br.com.webjsp.dao.UsuarioDao;
 import br.com.webjsp.entidade.Usuario;
@@ -42,6 +43,14 @@ public class UsuarioBll {
 		return usuario;
 	}
 	
+	public List<Usuario> pesquisar(Usuario usuarioCriterio) throws WebJspException {
+		try {
+			return this.usuarioDao.pesquisar(usuarioCriterio);
+		} catch (SQLException e) {
+			throw new WebJspException(e.getMessage());
+		}
+	}
+	
 	private boolean isSenhaCorreta(Usuario usuario, String senha) {
 		
 		boolean senhaCorreta = false;
@@ -51,5 +60,13 @@ public class UsuarioBll {
 		}
 		
 		return senhaCorreta;
+	}
+	
+	public Usuario recuperar(int idUsuario) throws WebJspException {
+		try {
+			return this.usuarioDao.recuperarPorId(idUsuario);
+		} catch (SQLException e) {
+			throw new WebJspException(e.getMessage());
+		}
 	}
 }
