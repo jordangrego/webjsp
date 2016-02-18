@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ include file="/topo.jsp"%>
-<%@ page import="br.com.webjsp.entidade.Usuario, 
+<%@ page
+	import="br.com.webjsp.entidade.Usuario, 
 				br.com.webjsp.entidade.Cliente, 
 				br.com.webjsp.negocio.UsuarioBll, 
 				br.com.webjsp.negocio.ClienteBll, 
 				br.com.webjsp.exceptions.WebJspException,
-				java.util.List" %>
+				java.util.List"%>
 <script type="text/javascript"
 	src="/webjsp/scripts/usuario/usuarioFormulario.js"></script>
 
@@ -38,21 +39,22 @@ if(request.getParameter("idUsuario") != null) {
 
 			<div class="form-group row">
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-					<label>Login</label> <input type="text" class="form-control numero" value="<%=usuarioFormulario.getLogin()%>"
-						id="txtLogin" />
+					<label>Login</label> <input type="text" class="form-control numero"
+						value="<%=usuarioFormulario.getLogin()%>" id="txtLogin" />
 
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-					<label>Nome do Usuário</label> <input type="text" 
-						class="form-control numero" id="txtNomeUsuario" value="<%=usuarioFormulario.getNome()%>" />
+					<label>Nome do Usuário</label> <input type="text"
+						class="form-control numero" id="txtNomeUsuario"
+						value="<%=usuarioFormulario.getNome()%>" />
 
 				</div>
 
 			</div>
 
+			<% if (usuarioFormulario.getIdCliente() == 0) { %>
 			<div class="panel panel-primary">
 				<div class="panel-body">
-
 
 					<div class="form-group row">
 						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -69,21 +71,23 @@ if(request.getParameter("idUsuario") != null) {
 					</div>
 				</div>
 			</div>
+			<%} %>
 
 			<div class="form-group row">
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 					<label>E-Mail</label> <input type="text"
-						class="form-control numero" id="txtEmail" value="<%=usuarioFormulario.getEmail()%>" />
+						class="form-control numero" id="txtEmail"
+						value="<%=usuarioFormulario.getEmail()%>" />
 
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 					<label>Cliente</label> <select class="form-control" id="ddlCliente">
 						<option value="0">Selecione</option>
 						<% for(Cliente cliente : listaCliente) { %>
-					        <option value="<%=cliente.getIdCliente()%>" 
-					        	<% if(cliente.getIdCliente() == usuarioFormulario.getIdCliente()) { out.println("selected=\"selected\""); }%>>
-					        	<%=cliente.getRazaoSocial()%></option>
-					    <% } %>
+						<option value="<%=cliente.getIdCliente()%>"
+							<% if(cliente.getIdCliente() == usuarioFormulario.getIdCliente()) { out.println("selected=\"selected\""); }%>>
+							<%=cliente.getRazaoSocial()%></option>
+						<% } %>
 					</select>
 
 				</div>
