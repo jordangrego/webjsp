@@ -3,7 +3,16 @@
 <%@ include file="/topo.jsp"%>
 <script type="text/javascript"
 	src="/webjsp/scripts/lote/loteFormulario.js"></script>
+<%
+	Lote form = new Lote();
 
+	form.setNumeroLote(50);
+	form.setObservacao("txtObservacao");
+	form.setQtdCaixa(10);
+
+	LoteBll negocio = new LoteBll();
+	negocio.inserir(form);
+%>
 
 <div class="panel panel-default">
 	<div class="panel-heading">
@@ -14,12 +23,12 @@
 
 			<div class="form-group row">
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-					<label>Número do Lote</label> <input type="text"
+					<label>NÃºmero do Lote</label> <input type="text"
 						class="form-control numero" id="txtNumeroLote" />
 
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-					<label>Número de Caixas</label> <input type="text"
+					<label>NÃºmero de Caixas</label> <input type="text"
 						class="form-control numero" id="txtNumeroCaixas" />
 
 				</div>
@@ -27,7 +36,7 @@
 			</div>
 			<div class="form-group row">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<label>Observação</label> <textarea class="form-control" rows="3" id="txtObservacao"></textarea>
+					<label>ObservaÃ§Ã£o</label> <textarea class="form-control" rows="3" id="txtObservacao"></textarea>
 
 				</div>
 
