@@ -1,3 +1,5 @@
+<%@page import="br.com.webjsp.negocio.LoteBll"%>
+<%@page import="br.com.webjsp.entidade.Lote"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ include file="/topo.jsp"%>
@@ -23,12 +25,12 @@
 
 			<div class="form-group row">
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-					<label>NÃºmero do Lote</label> <input type="text"
+					<label>Número do Lote</label> <input type="text"
 						class="form-control numero" id="txtNumeroLote" />
 
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-					<label>NÃºmero de Caixas</label> <input type="text"
+					<label>Número de Caixas</label> <input type="text"
 						class="form-control numero" id="txtNumeroCaixas" />
 
 				</div>
@@ -36,7 +38,7 @@
 			</div>
 			<div class="form-group row">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<label>ObservaÃ§Ã£o</label> <textarea class="form-control" rows="3" id="txtObservacao"></textarea>
+					<label>Observação</label> <textarea class="form-control" rows="3" id="txtObservacao"></textarea>
 
 				</div>
 
