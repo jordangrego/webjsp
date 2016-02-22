@@ -9,25 +9,36 @@
 <%
 	Lote loteFormulario = null;
 
-	if (request.getParameter("txtNumeroLote") != null) {
+	// criei um input novo, um input hidden chamada hdnIdLote, por padrão ele eh carregado com o valor do Id do lote se houver.
+	if(request.getParameter("hdnIdLote") != null) {
 		Lote form = new Lote();
+		LoteBll negocio = new LoteBll();
+		
 		int txtNumeroLote = Integer.parseInt(request.getParameter("txtNumeroLote"));
 		String txtObservacao = request.getParameter("txtObservacao");
 		int txtNumeroCaixas = Integer.parseInt(request.getParameter("txtNumeroCaixas"));
 
+		form.setIdLote(Integer.parseInt(request.getParameter("hdnIdLote").toString()));
 		form.setNumeroLote(txtNumeroLote);
 		form.setObservacao(txtObservacao);
 		form.setQtdCaixa(txtNumeroCaixas);
-
-		LoteBll negocio = new LoteBll();
-		negocio.inserir(form);
-
-		String sucesso = "Gravou Lote \n";
+		
+		// aqui ele verifica se é para fazer insert ou update
+		if (form.getIdLote() == 0) {
+			negocio.inserir(form);
+		}
+		else
+		{
+			negocio.alterar(form);
+		}
+		
+		String sucesso = "Lote Salvo com Sucesso! \n";
 		System.out.print(sucesso);
+		
 	}
-	else if (request.getParameter("idLote") != null) {
-		loteFormulario = new LoteBll()
-				.recuperar(Integer.parseInt(request.getParameter("idLote").toString()));
+	
+	if (request.getParameter("idLote") != null) {
+		loteFormulario = new LoteBll().recuperar(Integer.parseInt(request.getParameter("idLote").toString()));
 	} else {
 		loteFormulario = new Lote();
 		loteFormulario.setNumeroLote(0);
@@ -41,8 +52,8 @@
 		<h3 class="panel-title">Cadastro Lote</h3>
 	</div>
 	<div class="panel-body">
-		<form class="form-horizontal">
-
+		<form id="frmLote" class="form-horizontal" method="POST">
+			<input type="hidden" id="hdnIdLote" name="hdnIdLote" value="<%=loteFormulario.getIdLote()%>" />
 			<div class="form-group row">
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 					<label>Número do Lote</label> <input type="text"
