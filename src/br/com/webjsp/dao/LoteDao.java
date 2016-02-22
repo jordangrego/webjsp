@@ -16,23 +16,29 @@ public class LoteDao extends AbstractDao {
 
 	/**
 	 * Insere novo registro.
+	 * 
 	 * @param lote
 	 * @throws SQLException
 	 */
 	public void inserir(Lote lote) throws SQLException {
-		Date data = new Date(System.currentTimeMillis());  
-		SimpleDateFormat formatarDate = new SimpleDateFormat("yyyy-MM-dd"); 
-		
-		this.comandoSQL = conexao.prepareStatement("INSERT INTO public.lote(id_lote, id_cliente, id_usuario, numero_lote, data_recebimento, qtd_caixa, observacao) VALUES (NEXTVAL('lote_id_lote_seq'), 3, 1, '" + lote.getNumeroLote() + "', '" + formatarDate.format(data) +"', '" + lote.getQtdCaixa() + "', '" + lote.getObservacao() + "');");
-		comandoSQL.execute();																																							
-		
-		/*this.comandoSQL = conexao.prepareStatement("SELECT id_tipo_dado, descricao_tipo FROM public.tipo_dado order by id_tipo_dado desc limit 1");
-		ResultSet resultadoSql = comandoSQL.executeQuery();
-		
-		while (resultadoSql.next()) {
-			lote.setIdTipoDado(Integer.parseInt(resultadoSql.getString(1)));
-			lote.setDescricaoTipoDado(resultadoSql.getString(2).toString());
-		}*/
+		Date data = new Date(System.currentTimeMillis());
+		SimpleDateFormat dataFormatada = new SimpleDateFormat("yyyy-MM-dd");
+
+		this.comandoSQL = conexao.prepareStatement(
+				"INSERT INTO public.lote(id_lote, id_cliente, id_usuario, numero_lote, data_recebimento, qtd_caixa, observacao) VALUES (NEXTVAL('lote_id_lote_seq'), 3, 1, '"
+						+ lote.getNumeroLote() + "', '" + dataFormatada.format(data) + "', '" + lote.getQtdCaixa()
+						+ "', '" + lote.getObservacao() + "');");
+		comandoSQL.execute();
+
+		/*
+		 * this.comandoSQL = conexao.prepareStatement(
+		 * "SELECT id_tipo_dado, descricao_tipo FROM public.tipo_dado order by id_tipo_dado desc limit 1"
+		 * ); ResultSet resultadoSql = comandoSQL.executeQuery();
+		 * 
+		 * while (resultadoSql.next()) {
+		 * lote.setIdTipoDado(Integer.parseInt(resultadoSql.getString(1)));
+		 * lote.setDescricaoTipoDado(resultadoSql.getString(2).toString()); }
+		 */
 	}
 
 	/**
@@ -42,6 +48,10 @@ public class LoteDao extends AbstractDao {
 	 * @throws SQLException
 	 */
 	public void alterar(Lote lote) throws SQLException {
+		this.comandoSQL = conexao.prepareStatement(
+				"UPDATE public.lote SET  numero_lote='" + lote.getNumeroLote() + "', qtd_caixa='" + lote.getQtdCaixa() + "', observacao='" + lote.getObservacao() + "' WHERE id_lote = '" + lote.getIdLote() + "';");
+		
+		comandoSQL.execute();
 		/*
 		 * this.comandoSQL = conexao.prepareStatement(
 		 * "UPDATE public.tipo_dado set descricao_tipo = '" +

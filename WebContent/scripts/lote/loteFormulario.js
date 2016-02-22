@@ -1,9 +1,9 @@
 $(function() {
 
 	$('#btnCancelar').click(function() {
-		$(window).attr('location','/webjsp/lote/lotePesquisa.jsp')
+		$(window).attr('location', '/webjsp/lote/lotePesquisa.jsp')
 	});
-	
+
 	$('#btnSalvar').click(function() {
 		salvarLote();
 	});
@@ -11,5 +11,5 @@ $(function() {
 });
 
 function salvarLote() {
-	
+	$(window).attr('location', '/webjsp/lote/loteFormulario.jsp')
 }

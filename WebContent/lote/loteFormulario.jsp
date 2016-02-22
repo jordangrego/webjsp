@@ -1,3 +1,4 @@
+<%@page import="javax.xml.bind.ParseConversionEvent"%>
 <%@page import="br.com.webjsp.negocio.LoteBll"%>
 <%@page import="br.com.webjsp.entidade.Lote"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -6,14 +7,33 @@
 <script type="text/javascript"
 	src="/webjsp/scripts/lote/loteFormulario.js"></script>
 <%
-	Lote form = new Lote();
+	Lote loteFormulario = null;
 
-	form.setNumeroLote(50);
-	form.setObservacao("txtObservacao");
-	form.setQtdCaixa(10);
+	if (request.getParameter("txtNumeroLote") != null) {
+		Lote form = new Lote();
+		int txtNumeroLote = Integer.parseInt(request.getParameter("txtNumeroLote"));
+		String txtObservacao = request.getParameter("txtObservacao");
+		int txtNumeroCaixas = Integer.parseInt(request.getParameter("txtNumeroCaixas"));
 
-	LoteBll negocio = new LoteBll();
-	negocio.inserir(form);
+		form.setNumeroLote(txtNumeroLote);
+		form.setObservacao(txtObservacao);
+		form.setQtdCaixa(txtNumeroCaixas);
+
+		LoteBll negocio = new LoteBll();
+		negocio.inserir(form);
+
+		String sucesso = "Gravou Lote \n";
+		System.out.print(sucesso);
+	}
+	else if (request.getParameter("idLote") != null) {
+		loteFormulario = new LoteBll()
+				.recuperar(Integer.parseInt(request.getParameter("idLote").toString()));
+	} else {
+		loteFormulario = new Lote();
+		loteFormulario.setNumeroLote(0);
+		loteFormulario.setObservacao("");
+		loteFormulario.setQtdCaixa(0);
+	}
 %>
 
 <div class="panel panel-default">
@@ -26,26 +46,30 @@
 			<div class="form-group row">
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 					<label>Número do Lote</label> <input type="text"
-						class="form-control numero" id="txtNumeroLote" />
+						class="form-control numero" id="txtNumeroLote"
+						name="txtNumeroLote" value="<%=loteFormulario.getNumeroLote()%>" />
 
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 					<label>Número de Caixas</label> <input type="text"
-						class="form-control numero" id="txtNumeroCaixas" />
+						class="form-control numero" id="txtNumeroCaixas"
+						name="txtNumeroCaixas" value="<%=loteFormulario.getQtdCaixa()%>" />
 
 				</div>
 
 			</div>
 			<div class="form-group row">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<label>Observação</label> <textarea class="form-control" rows="3" id="txtObservacao"></textarea>
+					<label>Observação</label>
+					<textarea class="form-control" rows="3" id="txtObservacao"
+						name="txtObservacao"><%=loteFormulario.getObservacao()%></textarea>
 
 				</div>
 
 			</div>
 
 			<div class="btn-toolbar">
-				<button id="btnSalvar" type="button"
+				<button id="btnSalvar" type="submit"
 					class="btn btn-primary pull-right">Salvar</button>
 				<button id="btnCancelar" type="button"
 					class="btn btn-default pull-right">Cancelar</button>

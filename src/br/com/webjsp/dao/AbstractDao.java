@@ -14,7 +14,7 @@ public abstract class AbstractDao {
 	{
 		try {
 			Class.forName("org.postgresql.Driver");
-			this.conexao = DriverManager.getConnection("jdbc:postgresql://localhost:5432/PMS", "postgres", "postgres");
+			this.conexao = DriverManager.getConnection("jdbc:postgresql://localhost:5432/pms", "postgres", "9903");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
