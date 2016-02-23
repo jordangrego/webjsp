@@ -68,5 +68,4 @@ public class Lote {
 				+ numeroLote + ", dataRecebimento=" + dataRecebimento + ", qtdCaixa=" + qtdCaixa + ", observacao="
 				+ observacao + "]";
 	}
-
 }
