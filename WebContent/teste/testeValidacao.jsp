@@ -6,8 +6,7 @@
 	<div class="form-group">
 		<label for="inputName" class="control-label">Name</label> <input
 			type="text" class="form-control" id="inputName"
-			
-			="Cina Saffary" required>
+			required>
 	</div>
 	<div class="form-group has-feedback">
 		<label for="inputTwitter" class="control-label">Twitter</label>
