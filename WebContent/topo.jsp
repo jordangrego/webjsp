@@ -4,6 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>JSP - Postgre</title>
 <%@ include file="scripts.jsp"%>
+<script src="/webjsp/scripts/validator.min.js"></script>
 </head>
 <body>
 	<%@ include file="seguranca.jsp"%>

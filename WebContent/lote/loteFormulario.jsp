@@ -6,14 +6,15 @@
 <%@ include file="/topo.jsp"%>
 <script type="text/javascript"
 	src="/webjsp/scripts/lote/loteFormulario.js"></script>
+
 <%
 	Lote loteFormulario = null;
 
 	// criei um input novo, um input hidden chamada hdnIdLote, por padrão ele eh carregado com o valor do Id do lote se houver.
-	if(request.getParameter("hdnIdLote") != null) {
+	if (request.getParameter("hdnIdLote") != null) {
 		Lote form = new Lote();
 		LoteBll negocio = new LoteBll();
-		
+
 		int txtNumeroLote = Integer.parseInt(request.getParameter("txtNumeroLote"));
 		String txtObservacao = request.getParameter("txtObservacao");
 		int txtNumeroCaixas = Integer.parseInt(request.getParameter("txtNumeroCaixas"));
@@ -22,21 +23,19 @@
 		form.setNumeroLote(txtNumeroLote);
 		form.setObservacao(txtObservacao);
 		form.setQtdCaixa(txtNumeroCaixas);
-		
+
 		// aqui ele verifica se é para fazer insert ou update
 		if (form.getIdLote() == 0) {
 			negocio.inserir(form);
-		}
-		else
-		{
+		} else {
 			negocio.alterar(form);
 		}
-		
+
 		String sucesso = "Lote Salvo com Sucesso! \n";
 		System.out.print(sucesso);
-		
+
 	}
-	
+
 	if (request.getParameter("idLote") != null) {
 		loteFormulario = new LoteBll().recuperar(Integer.parseInt(request.getParameter("idLote").toString()));
 	} else {
@@ -49,32 +48,44 @@
 
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<h3 class="panel-title">Cadastro Lote</h3>
+		<%
+			if (request.getParameter("idLote") != null) {
+		%><h3 class="panel-title">Alterar Lote</h3>
+		<%
+			} else {
+		%><h3 class="panel-title">Cadastrar Lote</h3>
+		<%
+			}
+		%>
 	</div>
 	<div class="panel-body">
-		<form id="frmLote" class="form-horizontal" method="POST">
-			<input type="hidden" id="hdnIdLote" name="hdnIdLote" value="<%=loteFormulario.getIdLote()%>" />
+		<form data-toggle="validator" role="form" id="frmLote"
+			class="form-horizontal" method="POST">
+			<input type="hidden" id="hdnIdLote" name="hdnIdLote"
+				value="<%=loteFormulario.getIdLote()%>" />
 			<div class="form-group row">
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-					<label>Número do Lote</label> <input type="text"
-						class="form-control numero" id="txtNumeroLote"
-						name="txtNumeroLote" value="<%=loteFormulario.getNumeroLote()%>" />
-
+					<label for="txtNumeroLote" class="control-label">Número do
+						Lote</label> <input type="text" class="form-control numero"
+						id="txtNumeroLote" name="txtNumeroLote"
+						value="<%=loteFormulario.getNumeroLote()%>" required />
+					<div class="help-block with-errors"></div>
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-					<label>Número de Caixas</label> <input type="text"
-						class="form-control numero" id="txtNumeroCaixas"
-						name="txtNumeroCaixas" value="<%=loteFormulario.getQtdCaixa()%>" />
-
+					<label for="txtNumeroCaixas" class="control-label">Número
+						de Caixas</label> <input type="text" class="form-control numero"
+						id="txtNumeroCaixas" name="txtNumeroCaixas"
+						value="<%=loteFormulario.getQtdCaixa()%>" required />
+					<div class="help-block with-errors"></div>
 				</div>
 
 			</div>
 			<div class="form-group row">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<label>Observação</label>
+					<label for="txtObservacao" class="control-label">Observação</label>
 					<textarea class="form-control" rows="3" id="txtObservacao"
-						name="txtObservacao"><%=loteFormulario.getObservacao()%></textarea>
-
+						name="txtObservacao" required><%=loteFormulario.getObs()%></textarea>
+					<div class="help-block with-errors"></div>
 				</div>
 
 			</div>
