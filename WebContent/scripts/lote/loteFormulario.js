@@ -11,5 +11,8 @@ $(function() {
 });
 
 function salvarLote() {
-	$(window).attr('location', '/webjsp/lote/loteFormulario.jsp')
+	/*
+	$('#hdnAcao').val('e');
+	$('#frmLote').submit();
+	*/
 }

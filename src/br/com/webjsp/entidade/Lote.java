@@ -51,6 +51,13 @@ public class Lote {
 	public String getObservacao() {
 		return observacao;
 	}
+	
+	public String getObs() {
+		if (this.observacao == null) {
+			return "";
+		}
+		return observacao;
+	}
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
 	}
@@ -61,5 +68,4 @@ public class Lote {
 				+ numeroLote + ", dataRecebimento=" + dataRecebimento + ", qtdCaixa=" + qtdCaixa + ", observacao="
 				+ observacao + "]";
 	}
-
 }

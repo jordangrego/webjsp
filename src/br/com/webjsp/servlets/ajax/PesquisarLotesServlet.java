@@ -55,7 +55,7 @@ public class PesquisarLotesServlet extends HttpServlet {
 				retorno.append("\"" + lote.getQtdCaixa() + "\",");
 				
 				retorno.append("\"observacao\":");
-				retorno.append("\"" + (lote.getObservacao() != null ? lote.getObservacao().replace("\n", "").replace("\r", "") : "") + "\",");
+				retorno.append("\"" + (lote.getObs() != null ? lote.getObs().replace("\n", "").replace("\r", "") : "") + "\",");
 				
 				retorno.append("\"dataRecebimento\":");
 				retorno.append("\"" + lote.getDataRecebimento() + "\"");
