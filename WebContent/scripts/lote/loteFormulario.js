@@ -7,12 +7,15 @@ $(function() {
 	$('#btnSalvar').click(function() {
 		salvarLote();
 	});
-
+	$('#btnExcluir').click(function() {
+		$('#hdnAcao').val('e');
+		$('#frmLote').submit();
+	});
+	
 });
 
 function salvarLote() {
 	/*
-	$('#hdnAcao').val('e');
-	$('#frmLote').submit();
-	*/
+	 * $('#hdnAcao').val('e'); $('#frmLote').submit();
+	 */
 }
