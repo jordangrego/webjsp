@@ -12,22 +12,22 @@
 	src="/webjsp/scripts/usuario/usuarioFormulario.js"></script>
 
 <%
+	List<Cliente> listaCliente = new ClienteBll().pesquisar(new Cliente());
 
-List<Cliente> listaCliente = new ClienteBll().pesquisar(new Cliente());
+	Usuario usuarioFormulario = null;
 
-Usuario usuarioFormulario = null;
-
-if(request.getParameter("idUsuario") != null) {
-	// é update pois passou idUsuario
-	usuarioFormulario = new UsuarioBll().recuperar(Integer.parseInt(request.getParameter("idUsuario").toString())); 
-} else {
-	// é insert pois nao foi passado idUsuario, seto os campos para "" para nao dar nullpoitExcaption... mas eh porquice isso.
-	usuarioFormulario = new Usuario();
-	usuarioFormulario.setLogin("");
-	usuarioFormulario.setEmail("");
-	usuarioFormulario.setSenha("");
-	usuarioFormulario.setNome("");
-}
+	if (request.getParameter("idUsuario") != null) {
+		// é update pois passou idUsuario
+		usuarioFormulario = new UsuarioBll()
+				.recuperar(Integer.parseInt(request.getParameter("idUsuario").toString()));
+	} else {
+		// é insert pois nao foi passado idUsuario, seto os campos para "" para nao dar nullpoitExcaption... mas eh porquice isso.
+		usuarioFormulario = new Usuario();
+		usuarioFormulario.setLogin("");
+		usuarioFormulario.setEmail("");
+		usuarioFormulario.setSenha("");
+		usuarioFormulario.setNome("");
+	}
 %>
 
 <div class="panel panel-default">
@@ -52,7 +52,9 @@ if(request.getParameter("idUsuario") != null) {
 
 			</div>
 
-			<% if (usuarioFormulario.getIdCliente() == 0) { %>
+			<%
+				if (usuarioFormulario.getIdCliente() == 0) {
+			%>
 			<div class="panel panel-primary">
 				<div class="panel-body">
 
@@ -71,7 +73,9 @@ if(request.getParameter("idUsuario") != null) {
 					</div>
 				</div>
 			</div>
-			<%} %>
+			<%
+				}
+			%>
 
 			<div class="form-group row">
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -83,11 +87,17 @@ if(request.getParameter("idUsuario") != null) {
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 					<label>Cliente</label> <select class="form-control" id="ddlCliente">
 						<option value="0">Selecione</option>
-						<% for(Cliente cliente : listaCliente) { %>
+						<%
+							for (Cliente cliente : listaCliente) {
+						%>
 						<option value="<%=cliente.getIdCliente()%>"
-							<% if(cliente.getIdCliente() == usuarioFormulario.getIdCliente()) { out.println("selected=\"selected\""); }%>>
+							<%if (cliente.getIdCliente() == usuarioFormulario.getIdCliente()) {
+					out.println("selected=\"selected\"");
+				}%>>
 							<%=cliente.getRazaoSocial()%></option>
-						<% } %>
+						<%
+							}
+						%>
 					</select>
 
 				</div>
