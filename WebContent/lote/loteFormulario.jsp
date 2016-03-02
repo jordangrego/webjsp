@@ -10,12 +10,18 @@
 <%
 	Lote loteFormulario = null;
 
-	if (request.getParameter("hdnAcao") != null) {
+	if (request.getParameter("hdnAcao") != null && request.getParameter("hdnAcao").toString().equals("e")) {
 		Lote form = new Lote();
 		LoteBll negocio = new LoteBll();
-		//int txtIdLote = Integer.parseInt(request.getParameter("idLote"));
-		//negocio.deletar(txtIdLote);
-		System.out.print("Lote excluido com sucesso! \n");
+		int txtIdLote = Integer.parseInt(request.getParameter("idLote").toString());
+		try {
+		negocio.deletar(txtIdLote);
+		System.out.print("Lote Excluído com sucesso");
+		response.sendRedirect("http://localhost:8080/webjsp/lote/lotePesquisa.jsp");
+		return;
+		} catch(Exception e) {
+			%><div class="alert alert-danger" role="alert">Não é possível excluir esse lote</div><%
+		}
 	}
 	// criei um input novo, um input hidden chamada hdnIdLote, por padrão ele eh carregado com o valor do Id do lote se houver.
 
@@ -38,8 +44,8 @@
 		} else {
 			negocio.alterar(form);
 		}
-			String sucesso = "Lote salvo com sucesso \n";
-			System.out.print(sucesso);
+		String sucesso = "Lote salvo com sucesso \n";
+		System.out.print(sucesso);
 	}
 
 	if (request.getParameter("idLote") != null) {
@@ -66,9 +72,9 @@
 	</div>
 	<div class="panel-body">
 		<form data-toggle="validator" role="form" id="frmLote"
-			class="form-horizontal" method="POST"
-			action="/webjsp/lote/loteFormulario.jsp?idLote=">
-			<input type="hidden" id="hdnAcao" name="hdnAcao" value="" /> <input
+			class="form-horizontal" method="POST">
+			<input type="hidden" id="hdnAcao" name="hdnAcao" value="" />
+			<input type="hidden" id="hdnIdLoteExcluir" name="hdnIdLoteExcluir" value="" /> <input
 				type="hidden" id="hdnIdLote" name="hdnIdLote"
 				value="<%=loteFormulario.getIdLote()%>" />
 			<div class="form-group row">
