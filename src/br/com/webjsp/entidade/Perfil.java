@@ -19,4 +19,10 @@ public class Perfil {
 	public void setDescricaoPerfil(String descricaoPerfil) {
 		this.descricaoPerfil = descricaoPerfil;
 	}
+
+	@Override
+	public String toString() {
+		return "Perfil [idPerfil=" + idPerfil + ", descricaoPerfil=" + descricaoPerfil + "]";
+	}
+	
 }

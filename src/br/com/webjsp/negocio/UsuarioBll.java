@@ -69,4 +69,9 @@ public class UsuarioBll {
 			throw new WebJspException(e.getMessage());
 		}
 	}
+	
+	public Usuario inserir(Usuario usuario){
+		return usuario;		
+	}
+	
 }
