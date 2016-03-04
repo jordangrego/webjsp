@@ -21,7 +21,7 @@
 	Usuario usuarioFormulario = null;
 
 	//Inserir
-	if (request.getParameter("idUsuario") == null) {
+	if (request.getParameter("hdnIdLote") != null) {
 		Usuario form = new Usuario();
 		UsuarioPerfil formUsuarioPerfil = new UsuarioPerfil();
 		UsuarioBll negocio = new UsuarioBll();
@@ -31,17 +31,34 @@
 		String txtNome = request.getParameter("txtNomeUsuario");
 		String txtSenha = request.getParameter("txtSenha");
 		String txtEmail = request.getParameter("txtEmail");
-		int txtCliente = Integer.parseInt(request.getParameter("txtCliente"));
+		//int txtCliente = 1;
+		//int txtCliente = Integer.parseInt(request.getParameter("txtCliente"));
 
-		
-		//Aqui ele pega o id do Perfil e vai gravando
-		String perfis[] = request.getParameterValues("perfis");
-		for (int i = 0; i < perfis.length; i++) {
-			int txtPerfil = Integer.parseInt(perfis[i]);
+		form.setIdUsuario(Integer.parseInt(request.getParameter("hdnIdLote").toString()));
+		form.setLogin(txtLogin);
+		form.setNome(txtNome);
+		form.setSenha(txtSenha);
+		form.setEmail(txtEmail);
+		//form.setIdCliente(1);
 
-			formUsuarioPerfil.setIdUsuarioPerfil(txtPerfil);
-			negocioUsuarioPerfil.inserir(formUsuarioPerfil);
+		// aqui ele verifica se é para fazer insert ou update
+		if (form.getIdUsuario() == 0) {
+			negocio.inserir(form);
+
+			//Aqui ele pega o id do Perfil e vai gravando
+			String perfis[] = request.getParameterValues("perfis");
+			for (int i = 0; i < perfis.length; i++) {
+				int txtPerfil = Integer.parseInt(perfis[i]);
+
+				formUsuarioPerfil.setIdUsuarioPerfil(txtPerfil);
+				negocioUsuarioPerfil.inserir(formUsuarioPerfil);
+			}
+		} else {
+			System.out.println("Osh");
 		}
+		
+		String sucesso = "Lote gravado com sucesso \n";
+		System.out.println(sucesso);
 	}
 
 	if (request.getParameter("idUsuario") != null) {
@@ -70,13 +87,13 @@
 				value="<%=usuarioFormulario.getIdUsuario()%>" />
 			<div class="form-group row">
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-					<label>Login</label> <input type="text" class="form-control numero"
+					<label>Login</label> <input type="text" class="form-control"
 						value="<%=usuarioFormulario.getLogin()%>" id="txtLogin" />
 
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 					<label>Nome do Usuário</label> <input type="text"
-						class="form-control numero" id="txtNomeUsuario"
+						class="form-control" id="txtNomeUsuario"
 						value="<%=usuarioFormulario.getNome()%>" />
 
 				</div>
@@ -110,9 +127,8 @@
 
 			<div class="form-group row">
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-					<label>E-Mail</label> <input type="text"
-						class="form-control numero" id="txtEmail"
-						value="<%=usuarioFormulario.getEmail()%>" />
+					<label>E-Mail</label> <input type="email" class="form-control"
+						id="txtEmail" value="<%=usuarioFormulario.getEmail()%>" />
 
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -121,7 +137,7 @@
 						<%
 							for (Cliente cliente : listaCliente) {
 						%>
-						<option name="txtCliente" value="<%=cliente.getIdCliente()%>" 
+						<option name="txtCliente" value="<%=cliente.getIdCliente()%>"
 							<%if (cliente.getIdCliente() == usuarioFormulario.getIdCliente()) {
 					out.println("selected=\"selected\"");
 				}%>>

@@ -133,9 +133,9 @@ public class UsuarioDao extends AbstractDao {
 
 	public void inserir(Usuario usuario) throws SQLException {
 		this.comandoSQL = conexao.prepareStatement(
-				"INSERT INTO public.usuario(id_usuario, id_cliente, nome, login, senha, email, ativo) VALUES (NEXTVAL('usuario_id_usuario_seq'), 3, '"
+				"INSERT INTO public.usuario(id_usuario, id_cliente, nome, login, senha, email, usuario_ad, ativo) VALUES (NEXTVAL('usuario_id_usuario_seq'), 3, '"
 						+ usuario.getNome() + "','" + usuario.getLogin() + "','" + usuario.getSenha() + "','"
-						+ usuario.getEmail() + "','" + true + "');");
+						+ usuario.getEmail() + "','" + false + "','" + true + "');");
 		comandoSQL.execute();
 	}
 }

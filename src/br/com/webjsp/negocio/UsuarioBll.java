@@ -70,8 +70,8 @@ public class UsuarioBll {
 		}
 	}
 	
-	public Usuario inserir(Usuario usuario){
-		return usuario;		
+	public void inserir(Usuario usuario) throws SQLException {
+		this.usuarioDao.inserir(usuario);		
 	}
 	
 }

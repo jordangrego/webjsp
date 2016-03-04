@@ -12,8 +12,8 @@ public class UsuarioPerfilBll {
 		this.usuarioPerfilDao = new UsuarioPerfilDao();
 	}
 
-	public UsuarioPerfil inserir(UsuarioPerfil usuarioPerfil) throws SQLException {
-		return this.usuarioPerfilDao.inserePerfil(usuarioPerfil);
+	public void inserir(UsuarioPerfil usuarioPerfil) throws SQLException {
+		this.usuarioPerfilDao.inserePerfil(usuarioPerfil);
 	}
 
 }
