@@ -12,6 +12,7 @@ public class UsuarioPerfilDao extends AbstractDao {
 	public void inserePerfil(UsuarioPerfil usuarioPerfil) throws SQLException {
 		this.comandoSQL = conexao.prepareStatement(
 				"INSERT INTO public.usuario_perfil(id_usuario_perfil, id_usuario, id_perfil) VALUES (nextval('usuario_perfil_id_usuario_perfil_seq'), 3, '"
-						+ usuarioPerfil.getIdPerfil() + "');");
+						+ usuarioPerfil.getIdUsuarioPerfil() + "');");
+		comandoSQL.execute();
 	}
 }

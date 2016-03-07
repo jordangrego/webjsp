@@ -4,9 +4,9 @@ $(function() {
 		$(window).attr('location','/webjsp/usuario/usuarioPesquisa.jsp')
 	});
 	
-	$('#btnSalvar').click(function() {
+	/*$('#btnSalvar').click(function() {
 		salvarLote();
-	});
+	});*/
 
 });
 

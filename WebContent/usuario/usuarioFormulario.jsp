@@ -21,7 +21,7 @@
 	Usuario usuarioFormulario = null;
 
 	//Inserir
-	if (request.getParameter("hdnIdLote") != null) {
+	if (request.getParameter("hdnIdUsuario") != null) {
 		Usuario form = new Usuario();
 		UsuarioPerfil formUsuarioPerfil = new UsuarioPerfil();
 		UsuarioBll negocio = new UsuarioBll();
@@ -32,14 +32,14 @@
 		String txtSenha = request.getParameter("txtSenha");
 		String txtEmail = request.getParameter("txtEmail");
 		//int txtCliente = 1;
-		//int txtCliente = Integer.parseInt(request.getParameter("txtCliente"));
+		int txtCliente = Integer.parseInt(request.getParameter("txtCliente"));
 
-		form.setIdUsuario(Integer.parseInt(request.getParameter("hdnIdLote").toString()));
+		form.setIdUsuario(Integer.parseInt(request.getParameter("hdnIdUsuario").toString()));
 		form.setLogin(txtLogin);
 		form.setNome(txtNome);
 		form.setSenha(txtSenha);
 		form.setEmail(txtEmail);
-		//form.setIdCliente(1);
+		form.setIdCliente(txtCliente);
 
 		// aqui ele verifica se é para fazer insert ou update
 		if (form.getIdUsuario() == 0) {
@@ -51,13 +51,13 @@
 				int txtPerfil = Integer.parseInt(perfis[i]);
 
 				formUsuarioPerfil.setIdUsuarioPerfil(txtPerfil);
-				negocioUsuarioPerfil.inserir(formUsuarioPerfil);
+				negocioUsuarioPerfil.inserirUsuarioPerfil(formUsuarioPerfil);
 			}
 		} else {
 			System.out.println("Osh");
 		}
 		
-		String sucesso = "Lote gravado com sucesso \n";
+		String sucesso = "Usuario gravado com sucesso \n";
 		System.out.println(sucesso);
 	}
 
@@ -82,18 +82,18 @@
 	<div class="panel-body">
 		<form class="form-horizontal" data-toggle="validator" role="form"
 			id="frmUsuario" method="POST">
-			<input type="hidden" id="hdnIdLoteExcluir" name="hdnIdLoteExcluir"
-				value="" /> <input type="hidden" id="hdnIdLote" name="hdnIdLote"
+			<input type="hidden" id="hdnIdUsuarioExcluir" name="hdnIdUsuarioExcluir"
+				value="" /> <input type="hidden" id="hdnIdUsuario" name="hdnIdUsuario"
 				value="<%=usuarioFormulario.getIdUsuario()%>" />
 			<div class="form-group row">
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 					<label>Login</label> <input type="text" class="form-control"
-						value="<%=usuarioFormulario.getLogin()%>" id="txtLogin" />
+						value="<%=usuarioFormulario.getLogin()%>" id="txtLogin" name="txtLogin"/>
 
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 					<label>Nome do Usuário</label> <input type="text"
-						class="form-control" id="txtNomeUsuario"
+						class="form-control" id="txtNomeUsuario" name="txtNomeUsuario"
 						value="<%=usuarioFormulario.getNome()%>" />
 
 				</div>
@@ -109,12 +109,12 @@
 					<div class="form-group row">
 						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 							<label>Senha</label> <input type="text"
-								class="form-control numero" id="txtSenha" />
+								class="form-control numero" id="txtSenha" name="txtSenha" />
 
 						</div>
 						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 							<label>Confirmação da Senha</label> <input type="text"
-								class="form-control numero" id="txtConfirmacaoSenha" />
+								class="form-control numero" id="txtConfirmacaoSenha" name="txtConfirmacaoSenha" />
 
 						</div>
 
@@ -128,16 +128,16 @@
 			<div class="form-group row">
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 					<label>E-Mail</label> <input type="email" class="form-control"
-						id="txtEmail" value="<%=usuarioFormulario.getEmail()%>" />
+						id="txtEmail" name="txtEmail" value="<%=usuarioFormulario.getEmail()%>" />
 
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-					<label>Cliente</label> <select class="form-control" id="ddlCliente">
+					<label>Cliente</label> <select class="form-control" id="ddlCliente" name="txtCliente">
 						<option value="0">Selecione</option>
 						<%
 							for (Cliente cliente : listaCliente) {
 						%>
-						<option name="txtCliente" value="<%=cliente.getIdCliente()%>"
+						<option value="<%=cliente.getIdCliente()%>"
 							<%if (cliente.getIdCliente() == usuarioFormulario.getIdCliente()) {
 					out.println("selected=\"selected\"");
 				}%>>
@@ -160,7 +160,7 @@
 						%>
 						<tr>
 							<td style="width: 30px;"><input type="checkbox"
-								name="perfis" value="<%=perfil.getIdPerfil()%>"></td>
+								name="perfis" id="perfis" value="<%=perfil.getIdPerfil()%>"></td>
 							<td><%=perfil.getDescricaoPerfil()%></td>
 						</tr>
 						<%

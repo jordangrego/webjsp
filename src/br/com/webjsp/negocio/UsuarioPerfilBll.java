@@ -12,7 +12,7 @@ public class UsuarioPerfilBll {
 		this.usuarioPerfilDao = new UsuarioPerfilDao();
 	}
 
-	public void inserir(UsuarioPerfil usuarioPerfil) throws SQLException {
+	public void inserirUsuarioPerfil(UsuarioPerfil usuarioPerfil) throws SQLException {
 		this.usuarioPerfilDao.inserePerfil(usuarioPerfil);
 	}
 
