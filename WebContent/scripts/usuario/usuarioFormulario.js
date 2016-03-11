@@ -1,15 +1,27 @@
 $(function() {
 
 	$('#btnCancelar').click(function() {
-		$(window).attr('location','/webjsp/usuario/usuarioPesquisa.jsp')
+		$(window).attr('location', '/webjsp/usuario/usuarioPesquisa.jsp')
 	});
-	
-	/*$('#btnSalvar').click(function() {
-		salvarLote();
-	});*/
+	$('#btnExcluir').click(function() {
+				var url = window.location.href;
+				var parametrosDaUrl = url.split("=")[1];
+				$(window).attr(
+						'location',
+						'/webjsp/usuario/usuarioFormulario.jsp?idUsuario='
+								+ parametrosDaUrl);
+
+				$('#hdnAcao').val('e');
+				$('#hdnIdUsuarioExcluir').val(parametrosDaUrl);
+				$('#frmUsuario').submit();
+			});
+
+	/*
+	 * $('#btnSalvar').click(function() { salvarLote(); });
+	 */
 
 });
 
 function salvarLote() {
-	
+
 }

@@ -133,9 +133,23 @@ public class UsuarioDao extends AbstractDao {
 
 	public void inserir(Usuario usuario) throws SQLException {
 		this.comandoSQL = conexao.prepareStatement(
-				"INSERT INTO public.usuario(id_usuario, id_cliente, nome, login, senha, email, usuario_ad, ativo) VALUES (NEXTVAL('usuario_id_usuario_seq'), 3, '"
-						+ usuario.getNome() + "','" + usuario.getLogin() + "','" + usuario.getSenha() + "','"
-						+ usuario.getEmail() + "','" + false + "','" + true + "');");
+				"INSERT INTO public.usuario(id_usuario, id_cliente, nome, login, senha, email, usuario_ad, ativo) VALUES (NEXTVAL('usuario_id_usuario_seq'), "
+						+ usuario.getIdCliente() + ", '" + usuario.getNome() + "','" + usuario.getLogin() + "','"
+						+ usuario.getSenha() + "','" + usuario.getEmail() + "','" + false + "','" + true + "');");
+		comandoSQL.execute();
+	}
+
+	public void alterar(Usuario usuario) throws SQLException {
+		this.comandoSQL = conexao.prepareStatement(
+				"UPDATE public.usuario SET id_cliente='" + usuario.getIdCliente() + "', nome='" + usuario.getNome()
+						+ "', login='" + usuario.getLogin() + "', email='" + usuario.getEmail() + "', usuario_ad='"
+						+ false + "', ativo='" + true + "'WHERE id_usuario = '" + usuario.getIdUsuario() + "';");
+		comandoSQL.execute();
+	}
+
+	public void excluir(long idUsuario) throws SQLException {
+		this.comandoSQL = conexao
+				.prepareStatement("DELETE FROM public.usuario WHERE id_usuario = " + idUsuario + ";");
 		comandoSQL.execute();
 	}
 }
