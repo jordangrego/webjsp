@@ -58,12 +58,13 @@
 		form.setSenha(txtSenha);
 		form.setEmail(txtEmail);
 		form.setIdCliente(txtCliente);
-
+		
+		
 		// aqui ele verifica se é para fazer insert ou update
 		if (form.getIdUsuario() == 0) {
 			try {
 				negocio.inserir(form);
-
+				System.out.println("Aff");
 				//Aqui ele pega o id do Perfil e vai gravando
 				String perfis[] = request.getParameterValues("perfis");
 				for (int i = 0; i < perfis.length; i++) {
@@ -73,12 +74,14 @@
 					negocioUsuarioPerfil.inserirUsuarioPerfil(formUsuarioPerfil);
 				}
 			} catch (NullPointerException e) {
-%><div class="alert alert-danger" role="alert">Preecha os campos obrigatórios</div>
+%><div class="alert alert-danger" role="alert">Preecha os campos
+	obrigatórios</div>
 <%
 	} catch (Exception e) {
-		%><div class="alert alert-danger" role="alert">Login já utilizado, por favor, informe outro.</div>
-		<%
-			}
+%><div class="alert alert-danger" role="alert">Login já
+	utilizado, por favor, informe outro.</div>
+<%
+	}
 
 		} else {
 			negocio.alterar(form);
@@ -139,8 +142,8 @@
 		%>
 	</div>
 	<div class="panel-body">
-		<form class="form-horizontal" data-toggle="validator" role="form"
-			id="frmUsuario" method="POST" >
+		<form class="form-horizontal" name="formUsuario" id="formUsuario"
+			data-toggle="validator" role="form" id="frmUsuario" method="POST">
 			<input type="hidden" id="hdnAcao" name="hdnAcao" value="" /> <input
 				type="hidden" id="hdnIdUsuarioExcluir" name="hdnIdUsuarioExcluir"
 				value="" /> <input type="hidden" id="hdnIdUsuario"
@@ -169,13 +172,15 @@
 
 					<div class="form-group row">
 						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-							<label for="inputPassword" class="control-label">Senha</label> <input type="password"
-								class="form-control numero" id="txtSenha" name="txtSenha" required />
+							<label for="inputPassword" class="control-label">Senha</label> <input
+								type="password" class="form-control numero" id="txtSenha"
+								name="txtSenha" required />
 						</div>
 						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-							<label for="inputPassword" class="control-label">Confirmação da Senha</label> <input type="password"
-								class="form-control numero" id="txtConfirmacaoSenha"
-								name="txtConfirmacaoSenha" data-match="#txtSenha"
+							<label for="inputPassword" class="control-label">Confirmação
+								da Senha</label> <input type="password" class="form-control numero"
+								id="txtConfirmacaoSenha" name="txtConfirmacaoSenha"
+								data-match="#txtSenha"
 								data-match-error="Essas senhas não coincidem." />
 
 						</div>
@@ -191,7 +196,7 @@
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 					<label>E-Mail</label> <input type="email" class="form-control"
 						id="txtEmail" name="txtEmail"
-						value="<%=usuarioFormulario.getEmail()%>" required/>
+						value="<%=usuarioFormulario.getEmail()%>" required />
 
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -213,6 +218,7 @@
 				</div>
 			</div>
 			<div class="form-group row">
+				<div></div>
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 					<label>Perfil</label>
 
@@ -221,7 +227,7 @@
 							for (Perfil perfil : listaPerfis) {
 						%>
 						<tr>
-							<td style="width: 30px;"><input type="checkbox"
+							<td style="width: 30px;"><input type="checkbox" class="ckPerfil"
 								name="perfis" id="perfis" value="<%=perfil.getIdPerfil()%>"
 								<%if (request.getParameter("idUsuario") != null) {
 					if (UsuarioPerfilBll.IsPossuiPerfil(listaPerfis, perfil.getIdPerfil(),
@@ -236,9 +242,11 @@
 							}
 						%>
 					</table>
-
+					<div id="divCheck" class="divCheck"></div>
 				</div>
+
 			</div>
+
 
 			<div class="btn-toolbar">
 				<button id="btnSalvar" type="submit"
