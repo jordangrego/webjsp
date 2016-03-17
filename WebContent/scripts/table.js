@@ -6,6 +6,23 @@ $(function() {
 		$("#tblLotes").hide();
 		pesquisarLotes();
 	});
+	
+	
+	
+	$('.obrigatorio').blur(function() {
+		if ($(this).val() == '') {
+			$(this).after('<div>OBRIGATORIO PORRA</div>');
+					}
+		else {
+			console.log($(this).next());
+			if ($(this).next().html() == 'OBRIGATORIO PORRA') {
+				$(this).next().remove();
+			}
+		}
+	});
+	
+	
+	
 
 });
 

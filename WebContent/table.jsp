@@ -3,6 +3,20 @@
 <%@ include file="topo.jsp"%>
 <script type="text/javascript" src="scripts/table.js"></script>
 
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">TESTE</h3>
+	</div>
+	<div class="panel-body">
+		<form class="form-inline">
+			<div class="form-group">
+				<label>teste</label> <input type="text" id="txtTeste" class="form-control obrigatorio" />
+			</div>
+			
+			
+		</form>
+	</div>
+</div>
 
 <div class="panel panel-default">
 	<div class="panel-heading">
