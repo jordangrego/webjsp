@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
 <%@ include file="/topo.jsp"%>
 <%@ page import="br.com.webjsp.entidade.Usuario, 
 				br.com.webjsp.negocio.UsuarioBll, 

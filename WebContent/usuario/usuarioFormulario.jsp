@@ -2,8 +2,7 @@
 <%@page import="org.postgresql.util.PSQLDriverVersion"%>
 <%@page import="br.com.webjsp.negocio.UsuarioPerfilBll"%>
 <%@page import="br.com.webjsp.entidade.UsuarioPerfil"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+
 <%@ include file="/topo.jsp"%>
 <%@ page
 	import="br.com.webjsp.entidade.Usuario, 
@@ -58,8 +57,7 @@
 		form.setSenha(txtSenha);
 		form.setEmail(txtEmail);
 		form.setIdCliente(txtCliente);
-		
-		
+
 		// aqui ele verifica se é para fazer insert ou update
 		if (form.getIdUsuario() == 0) {
 			try {
@@ -78,8 +76,8 @@
 	obrigatórios</div>
 <%
 	} catch (Exception e) {
-%><div class="alert alert-danger" role="alert">Login já
-	utilizado, por favor, informe outro.</div>
+%><div class="alert alert-danger" role="alert">Login já utilizado,
+	por favor, informe outro.</div>
 <%
 	}
 
@@ -149,26 +147,25 @@
 				value="" /> <input type="hidden" id="hdnIdUsuario"
 				name="hdnIdUsuario" value="<%=usuarioFormulario.getIdUsuario()%>" />
 			<div class="form-group row">
-				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="divLogin">
 					<label>Login</label> <input type="text" class="form-control"
 						value="<%=usuarioFormulario.getLogin()%>" id="txtLogin"
 						name="txtLogin" required />
 
 				</div>
-				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="divNome">
 					<label>Nome do Usuário</label> <input type="text"
 						class="form-control" id="txtNomeUsuario" name="txtNomeUsuario"
 						value="<%=usuarioFormulario.getNome()%>" required />
 
 				</div>
-
 			</div>
 
 			<%
 				if (usuarioFormulario.getIdCliente() == 0) {
 			%>
 			<div class="panel panel-primary">
-				<div class="panel-body form-group">
+				<div class="panel-body form-group" id="divSenha">
 
 					<div class="form-group row">
 						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -179,9 +176,7 @@
 						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 							<label for="inputPassword" class="control-label">Confirmação
 								da Senha</label> <input type="password" class="form-control numero"
-								id="txtConfirmacaoSenha" name="txtConfirmacaoSenha"
-								data-match="#txtSenha"
-								data-match-error="Essas senhas não coincidem." />
+								id="txtConfirmacaoSenha" name="txtConfirmacaoSenha" />
 
 						</div>
 
@@ -193,16 +188,16 @@
 			%>
 
 			<div class="form-group row">
-				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="divEmail">
 					<label>E-Mail</label> <input type="email" class="form-control"
 						id="txtEmail" name="txtEmail"
 						value="<%=usuarioFormulario.getEmail()%>" required />
 
 				</div>
-				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="divCliente" >
 					<label>Cliente</label> <select class="form-control" id="ddlCliente"
 						name="txtCliente" required>
-						<option value="0">Selecione</option>
+						<option value=0>Selecione</option>
 						<%
 							for (Cliente cliente : listaCliente) {
 						%>
@@ -217,9 +212,8 @@
 					</select>
 				</div>
 			</div>
-			<div class="form-group row">
-				<div></div>
-				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+			<div class="form-group row" >
+				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="divCheckbox">
 					<label>Perfil</label>
 
 					<table class="table table-striped table-bordered">
@@ -227,8 +221,9 @@
 							for (Perfil perfil : listaPerfis) {
 						%>
 						<tr>
-							<td style="width: 30px;"><input type="checkbox" class="ckPerfil"
-								name="perfis" id="perfis" value="<%=perfil.getIdPerfil()%>"
+							<td style="width: 30px;"><input type="checkbox"
+								class="ckPerfil" name="perfis" id="perfis"
+								value="<%=perfil.getIdPerfil()%>"
 								<%if (request.getParameter("idUsuario") != null) {
 					if (UsuarioPerfilBll.IsPossuiPerfil(listaPerfis, perfil.getIdPerfil(),
 							usuarioFormulario.getIdUsuario()) == true) {%>
@@ -249,7 +244,7 @@
 
 
 			<div class="btn-toolbar">
-				<button id="btnSalvar" type="submit"
+				<button id="btnSalvar" type="button"
 					class="btn btn-primary pull-right">Salvar</button>
 				<%
 					if (request.getParameter("idUsuario") != null) {

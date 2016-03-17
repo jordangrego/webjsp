@@ -1,27 +1,39 @@
 package br.com.webjsp;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
-import br.com.webjsp.entidade.Lote;
-import br.com.webjsp.entidade.Perfil;
-import br.com.webjsp.negocio.LoteBll;
-import br.com.webjsp.negocio.PerfilBll;
+import br.com.webjsp.entidade.UsuarioPerfil;
+import br.com.webjsp.negocio.UsuarioPerfilBll;
 
 public class Principal {
-	public static void main(String[] args) throws SQLException {
 
-		/*Lote loteCriterio = new Lote();
-
-		List<Lote> listaLote = new LoteBll().pesquisar(loteCriterio);
-
-		System.out.println(listaLote);*/
+	public static void main(String[] args) throws Exception {
+		UsuarioPerfil formUsuarioPerfil = new UsuarioPerfil();
+		UsuarioPerfilBll negocioUsuarioPerfil = new UsuarioPerfilBll();
 		
-		//Perfil perfil = new Perfil();
-		List<Perfil> listaPerfis = new PerfilBll().recuperar(new Perfil());
-		for (Perfil perfil1 : listaPerfis){
-			System.out.println(perfil1.getIdPerfil());
-			System.out.println(perfil1.getDescricaoPerfil());
+		int perfis[] = {1};
+		for (int i = 0; i < perfis.length; i++) {
+			int txtPerfil = perfis[i];
+
+			formUsuarioPerfil.setIdPerfil(txtPerfil);
+			negocioUsuarioPerfil.inserirUsuarioPerfil(formUsuarioPerfil);
 		}
+
+			/**
+			 * for (Integer perfis : listaPerfis){ perfis.getIdPerfil(); if
+			 * (!this.UsuarioPerfilExiste(usuarioPerfil, idUsuario)) {
+			 * usuarioPerfil.intValue(); this.comandoSQL =
+			 * conexao.prepareStatement(
+			 * "INSERT INTO public.usuario_perfil(id_usuario_perfil, id_usuario, id_perfil) VALUES (nextval('usuario_perfil_id_usuario_perfil_seq'),"
+			 * + idUsuario + ", " + usuarioPerfil + ");");
+			 * 
+			 * comandoSQL.execute(); } }
+			 **/
+		}
+		
+		// descobrir o que inserir
+
 	}
-}
+

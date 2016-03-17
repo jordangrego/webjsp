@@ -1,8 +1,6 @@
 <%@page import="javax.xml.bind.ParseConversionEvent"%>
 <%@page import="br.com.webjsp.negocio.LoteBll"%>
 <%@page import="br.com.webjsp.entidade.Lote"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
 <%@ include file="/topo.jsp"%>
 <script type="text/javascript"
 	src="/webjsp/scripts/lote/loteFormulario.js"></script>
