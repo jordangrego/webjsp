@@ -3,29 +3,46 @@ $(function() {
 	$('#btnCancelar').click(function() {
 		$(window).attr('location', '/webjsp/usuario/usuarioPesquisa.jsp')
 	});
+	
 	$('#btnExcluir').click(
 			function() {
 				var url = window.location.href;
 				var parametrosDaUrl = url.split("=")[1];
 				var valor = "e";
-				$(window).attr(
-						'location',
-						'/webjsp/usuario/usuarioFormulario.jsp?idUsuario='
-								+ parametrosDaUrl);
+				$(window).attr('location', 'usuarioFormulario.jsp?hdnIdUsuarioExcluir=' + parametrosDaUrl + '&hdnAcao=' + valor );
+				//location.reload(); 
 
 				$('#hdnAcao').val(valor);
-				$('#hdnIdUsuarioExcluir').val('parametrosDaUrl');
-				// $('#frmUsuario').submit();
-				// console.log("vai se foder");
+				$('#hdnIdUsuarioExcluir').val(parametrosDaUrl);
+				//$('#frmUsuario').submit();
+			
 			});
 
 	$('#btnSalvar').click(function() {
 		validarForm()
 	});
 
-	/*
-	 * if ($('#hdnIdUsuario').val() != "") { perfisMarcados(); }
-	 */
+	// valida se as senhas coincidem
+	$(".senha")
+			.blur(
+					function() {
+						var senha = $("#txtSenha").val();
+						var senhaConfirmacao = $("#txtConfirmacaoSenha").val();
+
+						if (senha == senhaConfirmacao) {
+							$("#divSenha").removeClass("has-error");
+							$("#divConfirmacaoSenha").removeClass("has-error");
+							$("#helpSenha").remove();
+
+						} else {
+							$("#divSenha")
+									.append(
+											"<span name='helpSenha' id='helpSenha' class='help-block'>As senhas não coincidem</span>");
+
+							adicionaClass($('#divSenha'), 'has-error');
+						}
+
+					});
 
 });
 
@@ -37,11 +54,14 @@ function salvarLote() {
 	perfisMarcados();
 }
 
+// Validação de formulário
 function validarForm() {
 	$("#divNome").removeClass("has-error");
 	$("#divEmail").removeClass("has-error");
 	$("#divSenha").removeClass("has-error");
+	$("#divConfirmacaoSenha").removeClass("has-error");
 	$("#divLogin").removeClass("has-error");
+	$("#divCliente").removeClass("has-error");
 
 	$("span").remove();
 
@@ -52,7 +72,7 @@ function validarForm() {
 	if (login == "" || login == null) {
 		$("#divLogin")
 				.append(
-						"<span id='helpBlock1' class='help-block'>Campo Obrigatório</span>");
+						"<span id='helpLogin' class='help-block'>Campo Obrigatório</span>");
 
 		adicionaClass($('#divLogin'), 'has-error');
 
@@ -64,7 +84,7 @@ function validarForm() {
 	if (nome == "" || nome == null) {
 		$("#divNome")
 				.append(
-						"<span id='helpBlock1' class='help-block'>Campo Obrigatório</span>");
+						"<span id='helpNome' class='help-block'>Campo Obrigatório</span>");
 
 		adicionaClass($('#divNome'), 'has-error');
 
@@ -78,7 +98,7 @@ function validarForm() {
 	if (email === "" || email === null) {
 		$("#divEmail")
 				.append(
-						"<span id='helpBlock2' class='help-block'>Campo obrigatório</span>");
+						"<span id='helpEmail1' class='help-block'>Campo obrigatório</span>");
 
 		adicionaClass($('#divEmail'), 'has-error');
 
@@ -90,7 +110,7 @@ function validarForm() {
 		} else {
 			$("#divEmail")
 					.append(
-							"<span id='helpBlock2' class='help-block'>E-mail inválido</span>");
+							"<span id='helpEmail2' class='help-block'>E-mail inválido</span>");
 
 			adicionaClass($('#divEmail'), 'has-error');
 
@@ -101,16 +121,26 @@ function validarForm() {
 	// Valida se senha preenchida e se coincidem
 	var senha = $("#txtSenha").val();
 	var senhaConfirmacao = $("#txtConfirmacaoSenha").val();
-	if (senha == senhaConfirmacao && senha != "" && senha != null) {
-
-	} else {
+	if (senha === "" || senha === null) {
 		$("#divSenha")
 				.append(
-						"<span id='helpBlock3' class='help-block'>As senhas não coincidem</span>");
+						"<span name='helpSenha' id='helpSenha' class='help-block'>Campo obrigatório</span>");
 
 		adicionaClass($('#divSenha'), 'has-error');
 
 		sucesso = false;
+	} else {
+		if (senha == senhaConfirmacao) {
+
+		} else {
+			$("#divSenha")
+					.append(
+							"<span name='helpSenha' id='helpSenha' class='help-block'>As senhas não coincidem</span>");
+
+			adicionaClass($('#divSenha'), 'has-error');
+
+			sucesso = false;
+		}
 	}
 
 	// valida a lista de cliente
@@ -118,7 +148,7 @@ function validarForm() {
 	if (ddlCliente === "0") {
 		$("#divCliente")
 				.append(
-						"<span id='helpBlock3' class='help-block'>Selecione ao menos uma opção</span>");
+						"<span id='helpCliente' class='help-block'>Selecione uma opção</span>");
 
 		adicionaClass($('#divCliente'), 'has-error');
 
@@ -128,26 +158,43 @@ function validarForm() {
 	}
 
 	// valida checkbox
-	if (!document.getElementById('perfis').checked) {
+	var checkboxes = document.getElementsByName("perfis");
+	var is_checked = false;
+	for (var i = 0; i < checkboxes.length; i++) {
+		if (checkboxes[i].checked) {
+			is_checked = true;
+		}
+	}
+
+	if (is_checked) {
+		// at least one is checked;
+	} else {
 		$("#divCheckbox")
 				.append(
-						"<span id='helpBlock3' class='help-block'>Selecione ao menos uma opção</span>");
+						"<span id='helpPerfis' class='help-block'>Selecione ao menos uma opção</span>");
 
 		adicionaClass($('#divCheckbox'), 'has-error');
 
 		sucesso = false;
-	} else {
-
 	}
 
+	/*
+	 * if ($("#perfis").checked == false) { $("#divCheckbox") .append( "<span
+	 * id='helpPerfis' class='help-block'>Selecione ao menos uma opção</span>");
+	 * 
+	 * adicionaClass($('#divCheckbox'), 'has-error');
+	 * 
+	 * sucesso = false; } else { }
+	 */
+
 	if (sucesso == true) {
-		document.getElementById("validaForm").submit();
+		document.getElementById("formUsuario").submit();
 	} else {
 
 	}
 
 	return sucesso;
-};
+}
 
 function adicionaClass(campo, novoClass) {
 	var classAtual = campo.prop('class');

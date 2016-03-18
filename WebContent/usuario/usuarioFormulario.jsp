@@ -22,10 +22,13 @@
 	List<Perfil> listaPerfis = new PerfilBll().recuperar(new Perfil());
 	List<UsuarioPerfil> listaUsuarioPerfil = new UsuarioPerfilBll().recuperaUsuarioPerfil(new UsuarioPerfil());
 	Usuario usuarioFormulario = null;
-
+	String osh = request.getParameter("hdnIdUsuarioExcluir");
+	String aff=  request.getParameter("hdnAcao");
+	
+	System.out.println(osh);
+	System.out.println(aff);
 	//Excluir
-
-	if (request.getParameter("hdnIdUsuarioExcluir") != null && request.getParameter("hdnAcao").equals("e")) {
+	if (request.getParameter("hdnIdUsuarioExcluir") != null && request.getParameter("hdnAcao").toString().equals("e")) {
 		int txtIdUsuario = Integer.parseInt(request.getParameter("hdnIdUsuarioExcluir"));
 		UsuarioBll negocioUsuario = new UsuarioBll();
 		UsuarioPerfilBll negocioUsuarioPerfil = new UsuarioPerfilBll();
@@ -148,14 +151,14 @@
 				name="hdnIdUsuario" value="<%=usuarioFormulario.getIdUsuario()%>" />
 			<div class="form-group row">
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="divLogin">
-					<label>Login</label> <input type="text" class="form-control"
+					<label>Login</label> <input type="text" class="form-control obrigatorio"
 						value="<%=usuarioFormulario.getLogin()%>" id="txtLogin"
 						name="txtLogin" required />
 
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="divNome">
 					<label>Nome do Usuário</label> <input type="text"
-						class="form-control" id="txtNomeUsuario" name="txtNomeUsuario"
+						class="form-control obrigatorio" id="txtNomeUsuario" name="txtNomeUsuario"
 						value="<%=usuarioFormulario.getNome()%>" required />
 
 				</div>
@@ -165,17 +168,17 @@
 				if (usuarioFormulario.getIdCliente() == 0) {
 			%>
 			<div class="panel panel-primary">
-				<div class="panel-body form-group" id="divSenha">
+				<div class="panel-body form-group" id="divSenha" >
 
 					<div class="form-group row">
-						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" >
 							<label for="inputPassword" class="control-label">Senha</label> <input
-								type="password" class="form-control numero" id="txtSenha"
+								type="password" class="form-control numero obrigatorio" id="txtSenha"
 								name="txtSenha" required />
 						</div>
-						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="divSenhaConfirmacao">
 							<label for="inputPassword" class="control-label">Confirmação
-								da Senha</label> <input type="password" class="form-control numero"
+								da Senha</label> <input type="password" class="form-control numero senha"
 								id="txtConfirmacaoSenha" name="txtConfirmacaoSenha" />
 
 						</div>
@@ -189,13 +192,13 @@
 
 			<div class="form-group row">
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="divEmail">
-					<label>E-Mail</label> <input type="email" class="form-control"
+					<label>E-Mail</label> <input type="email" class="form-control email obrigatorio"
 						id="txtEmail" name="txtEmail"
 						value="<%=usuarioFormulario.getEmail()%>" required />
 
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="divCliente" >
-					<label>Cliente</label> <select class="form-control" id="ddlCliente"
+					<label>Cliente</label> <select class="form-control lista" id="ddlCliente"
 						name="txtCliente" required>
 						<option value=0>Selecione</option>
 						<%

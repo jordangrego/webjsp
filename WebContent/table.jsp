@@ -9,9 +9,7 @@
 		<form class="form-inline">
 			<div class="form-group">
 				<label>teste</label> <input type="text" id="txtTeste" class="form-control obrigatorio" />
-			</div>
-			
-			
+			</div>			
 		</form>
 	</div>
 </div>
