@@ -1,5 +1,6 @@
 package br.com.webjsp.entidade;
 
+import java.sql.Blob;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -14,7 +15,7 @@ public class Cliente {
 	private boolean existeCaixaTriplex;
 	private int percAprovacao;
 	private int tamanhoNumeroCaixa;
-	private byte[] logo;
+	private Blob logo;
 	private byte[] fundoEspelho;
 	private int idTipoCodigoBarra;
 	private int prazo_entrega;
@@ -101,12 +102,12 @@ public class Cliente {
 		this.tamanhoNumeroCaixa = tamanhoNumeroCaixa;
 	}
 	
-	public byte[] getLogo() {
+	public Blob getLogo() {
 		return logo;
 	}
 	
-	public void setLogo(byte[] logo) {
-		this.logo = logo;
+	public void setLogo(Blob blob) {
+		this.logo = blob;
 	}
 	
 	public byte[] getFundoEspelho() {
@@ -154,7 +155,7 @@ public class Cliente {
 		return "Cliente [idCliente=" + idCliente + ", idUsuario=" + idUsuario + ", razaoSocial=" + razaoSocial
 				+ ", emailCliente=" + emailCliente + ", cnpj=" + cnpj + ", dataHora=" + dataHora + ", qtdCaixaPadrao="
 				+ qtdCaixaPadrao + ", existeCaixaTriplex=" + existeCaixaTriplex + ", percAprovacao=" + percAprovacao
-				+ ", tamanhoNumeroCaixa=" + tamanhoNumeroCaixa + ", logo=" + Arrays.toString(logo) + ", fundoEspelho="
+				+ ", tamanhoNumeroCaixa=" + tamanhoNumeroCaixa + ", logo=" + logo + ", fundoEspelho="
 				+ Arrays.toString(fundoEspelho) + ", idTipoCodigoBarra=" + idTipoCodigoBarra + ", prazo_entrega="
 				+ prazo_entrega + ", metaPaginasDia=" + metaPaginasDia + ", paginas_total_contrato="
 				+ paginas_total_contrato + "]";

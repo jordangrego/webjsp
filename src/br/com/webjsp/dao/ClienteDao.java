@@ -1,6 +1,5 @@
 package br.com.webjsp.dao;
 
-import java.io.InputStream;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,7 +9,6 @@ import java.util.Date;
 import java.util.List;
 
 import br.com.webjsp.entidade.Cliente;
-import br.com.webjsp.entidade.Lote;
 
 public class ClienteDao extends AbstractDao {
 

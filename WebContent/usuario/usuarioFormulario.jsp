@@ -138,7 +138,8 @@
 		%>
 	</div>
 	<div class="panel-body">
-		<form class="form-horizontal" name="formUsuario" id="formUsuario" id="frmUsuario" method="POST">
+		<form class="form-horizontal" name="formUsuario" id="formUsuario"
+			id="frmUsuario" method="POST">
 			<input type="hidden" id="hdnAcao" name="hdnAcao" value="" /> <input
 				type="hidden" id="hdnIdUsuarioExcluir" name="hdnIdUsuarioExcluir"
 				value="" /> <input type="hidden" id="hdnIdUsuario"

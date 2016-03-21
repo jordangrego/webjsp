@@ -12,7 +12,6 @@
   	<li>TableSorter (js)</li>
   	<li>Postgre</li>
   </ul>
-  
 </div>
 
 <%@ include file="fundo.jsp"%>
