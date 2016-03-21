@@ -22,13 +22,10 @@
 	List<Perfil> listaPerfis = new PerfilBll().recuperar(new Perfil());
 	List<UsuarioPerfil> listaUsuarioPerfil = new UsuarioPerfilBll().recuperaUsuarioPerfil(new UsuarioPerfil());
 	Usuario usuarioFormulario = null;
-	String osh = request.getParameter("hdnIdUsuarioExcluir");
-	String aff=  request.getParameter("hdnAcao");
-	
-	System.out.println(osh);
-	System.out.println(aff);
+
 	//Excluir
-	if (request.getParameter("hdnIdUsuarioExcluir") != null && request.getParameter("hdnAcao").toString().equals("e")) {
+	if (request.getParameter("hdnIdUsuarioExcluir") != null
+			&& request.getParameter("hdnAcao").toString().equals("e")) {
 		int txtIdUsuario = Integer.parseInt(request.getParameter("hdnIdUsuarioExcluir"));
 		UsuarioBll negocioUsuario = new UsuarioBll();
 		UsuarioPerfilBll negocioUsuarioPerfil = new UsuarioPerfilBll();
@@ -51,7 +48,6 @@
 		String txtNome = request.getParameter("txtNomeUsuario");
 		String txtSenha = request.getParameter("txtSenha");
 		String txtEmail = request.getParameter("txtEmail");
-		//int txtCliente = 1;
 		int txtCliente = Integer.parseInt(request.getParameter("txtCliente"));
 
 		form.setIdUsuario(Integer.parseInt(request.getParameter("hdnIdUsuario").toString()));
@@ -107,7 +103,6 @@
 			listaUsuarioPerfis2 = listaUsuarioPerfis;
 
 			negocioUsuarioPerfil.alterarUsuarioPerfil(listaUsuarioPerfis2, txtIdUsuario);
-			System.out.println(listaUsuarioPerfis);
 		}
 
 		String sucesso = "Usuario gravado com sucesso \n";
@@ -143,23 +138,24 @@
 		%>
 	</div>
 	<div class="panel-body">
-		<form class="form-horizontal" name="formUsuario" id="formUsuario"
-			data-toggle="validator" role="form" id="frmUsuario" method="POST">
+		<form class="form-horizontal" name="formUsuario" id="formUsuario" id="frmUsuario" method="POST">
 			<input type="hidden" id="hdnAcao" name="hdnAcao" value="" /> <input
 				type="hidden" id="hdnIdUsuarioExcluir" name="hdnIdUsuarioExcluir"
 				value="" /> <input type="hidden" id="hdnIdUsuario"
 				name="hdnIdUsuario" value="<%=usuarioFormulario.getIdUsuario()%>" />
 			<div class="form-group row">
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="divLogin">
-					<label>Login</label> <input type="text" class="form-control obrigatorio"
+					<label>Login</label> <input type="text"
+						class="form-control obrigatorio"
 						value="<%=usuarioFormulario.getLogin()%>" id="txtLogin"
 						name="txtLogin" required />
 
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="divNome">
 					<label>Nome do Usuário</label> <input type="text"
-						class="form-control obrigatorio" id="txtNomeUsuario" name="txtNomeUsuario"
-						value="<%=usuarioFormulario.getNome()%>" required />
+						class="form-control obrigatorio" id="txtNomeUsuario"
+						name="txtNomeUsuario" value="<%=usuarioFormulario.getNome()%>"
+						required />
 
 				</div>
 			</div>
@@ -168,18 +164,20 @@
 				if (usuarioFormulario.getIdCliente() == 0) {
 			%>
 			<div class="panel panel-primary">
-				<div class="panel-body form-group" id="divSenha" >
+				<div class="panel-body form-group" id="divSenha">
 
 					<div class="form-group row">
-						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" >
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 							<label for="inputPassword" class="control-label">Senha</label> <input
-								type="password" class="form-control numero obrigatorio" id="txtSenha"
-								name="txtSenha" required />
+								type="password" class="form-control numero obrigatorio"
+								id="txtSenha" name="txtSenha" required />
 						</div>
-						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="divSenhaConfirmacao">
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
+							id="divSenhaConfirmacao">
 							<label for="inputPassword" class="control-label">Confirmação
-								da Senha</label> <input type="password" class="form-control numero senha"
-								id="txtConfirmacaoSenha" name="txtConfirmacaoSenha" />
+								da Senha</label> <input type="password"
+								class="form-control numero senha" id="txtConfirmacaoSenha"
+								name="txtConfirmacaoSenha" />
 
 						</div>
 
@@ -192,14 +190,14 @@
 
 			<div class="form-group row">
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="divEmail">
-					<label>E-Mail</label> <input type="email" class="form-control email obrigatorio"
-						id="txtEmail" name="txtEmail"
-						value="<%=usuarioFormulario.getEmail()%>" required />
+					<label>E-Mail</label> <input type="email"
+						class="form-control email obrigatorio" id="txtEmail"
+						name="txtEmail" value="<%=usuarioFormulario.getEmail()%>" required />
 
 				</div>
-				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="divCliente" >
-					<label>Cliente</label> <select class="form-control lista" id="ddlCliente"
-						name="txtCliente" required>
+				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="divCliente">
+					<label>Cliente</label> <select class="form-control lista"
+						id="ddlCliente" name="txtCliente" required>
 						<option value=0>Selecione</option>
 						<%
 							for (Cliente cliente : listaCliente) {
@@ -215,7 +213,7 @@
 					</select>
 				</div>
 			</div>
-			<div class="form-group row" >
+			<div class="form-group row">
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="divCheckbox">
 					<label>Perfil</label>
 

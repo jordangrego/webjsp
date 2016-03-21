@@ -18,6 +18,7 @@ public class Cliente {
 	private byte[] fundoEspelho;
 	private int idTipoCodigoBarra;
 	private int prazo_entrega;
+	private int metaPaginasDia;
 	private int paginas_total_contrato;
 	
 	public int getIdCliente() {
@@ -132,15 +133,34 @@ public class Cliente {
 		this.prazo_entrega = prazo_entrega;
 	}
 	
-	public int getPaginas_total_contrato() {
-		return paginas_total_contrato;
+	public int getMetaPaginasDia() {
+		return metaPaginasDia;
+	}
+
+	public void setMetaPaginasDia(int metaPaginasDia) {
+		this.metaPaginasDia = metaPaginasDia;
 	}
 	
+	public int getPaginas_total_contrato() {
+		return paginas_total_contrato;
+	}	
+
 	public void setPaginas_total_contrato(int paginas_total_contrato) {
 		this.paginas_total_contrato = paginas_total_contrato;
 	}
-	
+
 	@Override
+	public String toString() {
+		return "Cliente [idCliente=" + idCliente + ", idUsuario=" + idUsuario + ", razaoSocial=" + razaoSocial
+				+ ", emailCliente=" + emailCliente + ", cnpj=" + cnpj + ", dataHora=" + dataHora + ", qtdCaixaPadrao="
+				+ qtdCaixaPadrao + ", existeCaixaTriplex=" + existeCaixaTriplex + ", percAprovacao=" + percAprovacao
+				+ ", tamanhoNumeroCaixa=" + tamanhoNumeroCaixa + ", logo=" + Arrays.toString(logo) + ", fundoEspelho="
+				+ Arrays.toString(fundoEspelho) + ", idTipoCodigoBarra=" + idTipoCodigoBarra + ", prazo_entrega="
+				+ prazo_entrega + ", metaPaginasDia=" + metaPaginasDia + ", paginas_total_contrato="
+				+ paginas_total_contrato + "]";
+	}
+	
+	/*@Override
 	public String toString() {
 		return "Cliente [idCliente=" + idCliente + ", idUsuario=" + idUsuario + ", razaoSocial=" + razaoSocial
 				+ ", emailCliente=" + emailCliente + ", cnpj=" + cnpj + ", dataHora=" + dataHora + ", qtdCaixaPadrao="
@@ -157,6 +177,8 @@ public class Cliente {
 				+ ", getPrazo_entrega()=" + getPrazo_entrega() + ", getPaginas_total_contrato()="
 				+ getPaginas_total_contrato() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
 				+ ", toString()=" + super.toString() + "]";
-	}
+	}*/
+
+	
 
 }
