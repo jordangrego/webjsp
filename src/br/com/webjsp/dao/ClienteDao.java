@@ -1,5 +1,7 @@
 package br.com.webjsp.dao;
 
+import java.io.InputStream;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -179,4 +181,39 @@ public class ClienteDao extends AbstractDao {
 
 		return listaRetorno;
 	}
+	
+	public void gravaLogo(byte[] imagem, long idCliente) {
+		try {
+			PreparedStatement ps = conexao.prepareStatement("update public.cliente set logo=? where id_cliente = ?");
+			ps.setBytes(1, imagem);
+			ps.setLong(2, idCliente);
+			this.comandoSQL = ps;
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public byte[] recuperaLogo(long idCliente) {
+		try {
+			PreparedStatement ps = conexao.prepareStatement("select logo from public.cliente where id_cliente = ?");
+			ps.setLong(1, idCliente);
+			this.comandoSQL = ps;
+			
+			ResultSet resultadoSql = comandoSQL.executeQuery();
+
+			while (resultadoSql.next()) {
+				byte[] logo = resultadoSql.getBytes("logo");
+				return logo;
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
 }

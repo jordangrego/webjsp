@@ -67,4 +67,15 @@ public class ClienteBll {
 	public List<Cliente> pesquisar(Cliente criterioCriterio) throws SQLException {
 		return this.clienteDao.pesquisar(criterioCriterio);
 	}
+	
+	
+	public void gravaLogo(byte[] imagem, long idCliente) {
+		this.clienteDao.gravaLogo(imagem, idCliente);
+
+	}
+	
+	public byte[] recuperaLogo(long idCliente) {
+		return this.clienteDao.recuperaLogo(idCliente);
+	}
+	
 }

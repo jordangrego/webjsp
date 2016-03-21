@@ -1,15 +1,30 @@
 package br.com.webjsp;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
-import br.com.webjsp.entidade.UsuarioPerfil;
-import br.com.webjsp.negocio.UsuarioPerfilBll;
+import br.com.webjsp.negocio.ClienteBll;
 
 public class Principal {
 
 	public static void main(String[] args) throws Exception {
+		
+/*
+		Path path = Paths.get("C:\\ANAC\\2-Sistemas\\trunk\\Aev\\01.Sistema\\06.Implementacao\\01.Aplicacao\\ANAC.AEV.Web\\Imagens\\anac_logo.png");
+		byte[] data = Files.readAllBytes(path);
+		
+		new ClienteBll().gravaLogo(data, 3);
+		System.out.println("Fechou");
+		*/
+		
+		
+		byte[] logo = new ClienteBll().recuperaLogo(3);
+		
+		System.out.println(logo.length);
+		
+		
+		/*
 		UsuarioPerfil formUsuarioPerfil = new UsuarioPerfil();
 		UsuarioPerfilBll negocioUsuarioPerfil = new UsuarioPerfilBll();
 		
@@ -19,7 +34,7 @@ public class Principal {
 
 			formUsuarioPerfil.setIdPerfil(txtPerfil);
 			negocioUsuarioPerfil.inserirUsuarioPerfil(formUsuarioPerfil);
-		}
+		}*/
 
 			/**
 			 * for (Integer perfis : listaPerfis){ perfis.getIdPerfil(); if
