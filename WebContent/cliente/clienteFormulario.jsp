@@ -1,13 +1,19 @@
+<%@page import="br.com.webjsp.negocio.TipoCodigoBarraBll"%>
+<%@page import="java.io.InputStream, java.io.FileInputStream"%>
+<%@page import="org.apache.tomcat.jni.File"%>
 <%@page import="java.sql.Blob"%>
 <%@ include file="/topo.jsp"%>
 <%@ page
-	import="br.com.webjsp.entidade.Cliente,br.com.webjsp.negocio.ClienteBll"%>
+	import="br.com.webjsp.entidade.Cliente,br.com.webjsp.negocio.ClienteBll, br.com.webjsp.entidade.TipoCodigoBarra"%>
 
-<%@page import="java.util.ArrayList, java.util.Date"%>
+<%@page import="java.util.ArrayList, java.util.Date, java.util.List"%>
 
 <script type="text/javascript"
 	src="/webjsp/scripts/cliente/clienteFormulario.js"></script>
 <%
+	List<TipoCodigoBarra> listaTipoCodigoBarra = new TipoCodigoBarraBll()
+			.pesquisaTipoCodigoBarra(new TipoCodigoBarra());
+	Cliente clienteFormulario = null;
 	//Inserir
 	if (request.getParameter("hdnIdCliente") != null) {
 		Cliente form = new Cliente();
@@ -18,7 +24,10 @@
 		String txtRazaoSocial = request.getParameter("txtRazaoSocial");
 		String txtEmailCliente = request.getParameter("txtEmailCliente");
 		String txtCnpj = request.getParameter("txtCNPJ");
-		String imgLogo = request.getParameter("fileLogo");
+		String imgLogo =  request.getParameter("fileLogo");
+		Part filePart = request.getPart("fileLogo");
+	   //	InputStream is = new FileInputStream(filePart);
+	   	System.out.println(filePart);
 		String imgFundoEspelho = request.getParameter("fileFundoEspelho");
 		int txtQtdCaixaPadrao = Integer.parseInt(request.getParameter("txtQtdCaixaBoxLote"));
 		boolean isExisteCaixaTriplex = Boolean.parseBoolean(request.getParameter("checkCaixaTriplex"));
@@ -26,7 +35,7 @@
 		int txtPrazoEntrega = Integer.parseInt(request.getParameter("txtPrazoEntrega"));
 		int txtPaginasTotalContrato = Integer.parseInt(request.getParameter("txtQtdPagTotaisContrato"));
 		int txtMetaPaginasDia = Integer.parseInt(request.getParameter("txtMetaDiaria"));
-		
+
 		int txtIdTipoCodigoBarra = Integer.parseInt(request.getParameter("txtBarcode"));
 
 		form.setRazaoSocial(txtRazaoSocial);
@@ -42,8 +51,23 @@
 		form.setMetaPaginasDia(txtMetaPaginasDia);
 		form.setIdTipoCodigoBarra(txtIdTipoCodigoBarra);
 		form.setDataHora(date);
-	} else {
 		
+		if(form.getIdUsuario() == 0) {
+			negocio.inserir(form);
+		} else {
+			
+		}
+	}
+
+	if (request.getParameter("idCliente") != null) {
+		// é update pois passou idUsuario
+		//usuarioFormulario = new UsuarioBll()
+		//.recuperar(Integer.parseInt(request.getParameter("idUsuario").toString()));
+	} else {		
+		clienteFormulario = new Cliente();
+		clienteFormulario.setRazaoSocial("");
+		clienteFormulario.setEmailCliente("");
+		clienteFormulario.setCnpj("");
 	}
 %>
 <div class="panel panel-default">
@@ -51,79 +75,96 @@
 		<h3 class="panel-title">Cadastrar Cliente</h3>
 	</div>
 	<div class="panel-body">
-		<form class="form-horizontal" name="formCliente" id="formCliente"
-			method="POST">
+		<form class="form-horizontal" name="formCliente" id="formCliente" 
+			method="POST" >
+			<input type="hidden" id="hdnIdCliente" name="hdnIdCliente"
+				value="<%=clienteFormulario.getIdCliente()%>" />
 			<div class="form-group row">
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 					<label>Nome</label> <input type="text" class="form-control"
-						value="" id="txtRazaoSocial" name="txtRazaoSocial" />
+						value="<%=clienteFormulario.getRazaoSocial()%>"
+						id="txtRazaoSocial" name="txtRazaoSocial" />
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 					<label>E-mail</label> <input type="text" class="form-control"
-						value="" id="txtEmailCliente" name="txtEmailCliente" />
+						value="<%=clienteFormulario.getEmailCliente()%>"
+						id="txtEmailCliente" name="txtEmailCliente" />
 				</div>
 			</div>
 			<div class="form-group row">
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 					<label>CNPJ</label> <input type="text" class="form-control"
-						value="" id="txtCNPJ" name="txtCNPJ" />
+						value="<%=clienteFormulario.getCnpj()%>" id="txtCNPJ"
+						name="txtCNPJ" />
 				</div>
 			</div>
 			<div class="form-group row">
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 					<label>Logo</label> <input type="file"
-						class="btn btn-default btn-sm file-upload" value="" id="fileLogo"
+						class="btn btn-default btn-sm file-upload"
+						value="<%=clienteFormulario.getLogo()%>" id="fileLogo"
 						name="fileLogo" />
 				</div>
 			</div>
 			<div class="form-group row">
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 					<label>Fundo Espelho</label> <input type="file"
-						class="btn btn-default btn-sm file-upload" value=""
+						class="btn btn-default btn-sm file-upload"
+						value="<%=clienteFormulario.getFundoEspelho()%>"
 						id="fileFundoEspelho" name="fileFundoEspelho" />
 				</div>
 			</div>
 			<div class="form-group row">
 				<div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-					<label>Quantidade Caracteres Caixa Box</label> <input type="text"
-						class="form-control" value="" id="txtQtdCaracteresCaixaBox"
-						name="txtQtdCaracteresCaixaBox" />
-				</div>
-				<div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
 					<label>Quantidade Caixa Box Lote</label> <input type="text"
-						class="form-control" value="" id="txtQtdCaixaBoxLote"
-						name="txtQtdCaixaBoxLote" />
+						class="form-control"
+						value="<%=clienteFormulario.getQtdCaixaPadrao()%>"
+						id="txtQtdCaixaBoxLote" name="txtQtdCaixaBoxLote" />
 				</div>
 				<div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
 					<label>Caixa Triplex?</label> <input type="checkbox" class="center"
-						value="" id="checkCaixaTriplex" name="checkCaixaTriplex" />
+						value="<%=clienteFormulario.isExisteCaixaTriplex()%>"
+						id="checkCaixaTriplex" name="checkCaixaTriplex" />
 				</div>
 			</div>
 			<div class="form-group row">
 				<div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
 					<label>% Minimo para Aprovação</label> <input type="text"
-						class="form-control" value="" id="txtMinAprov" name="txtMinAprov" />
+						class="form-control"
+						value="<%=clienteFormulario.getPercAprovacao()%>" id="txtMinAprov"
+						name="txtMinAprov" />
 				</div>
 				<div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
 					<label>Prazo de Entrega</label> <input type="text"
-						class="form-control" value="" id="txtPrazoEntrega"
-						name="txtPrazoEntrega" />
+						class="form-control"
+						value="<%=clienteFormulario.getPrazo_entrega()%>"
+						id="txtPrazoEntrega" name="txtPrazoEntrega" />
 				</div>
 			</div>
 			<div class="form-group row">
 				<div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
 					<label>Qtd. páginas totais do contrato</label> <input type="text"
-						class="form-control" value="" id="txtQtdPagTotaisContrato"
-						name="txtQtdPagTotaisContrato" />
+						class="form-control"
+						value="<%=clienteFormulario.getPaginas_total_contrato()%>"
+						id="txtQtdPagTotaisContrato" name="txtQtdPagTotaisContrato" />
 				</div>
 				<div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
 					<label>Meta Diária</label> <input type="text" class="form-control"
-						value="" id="txtMetaDiaria" name="txtMetaDiaria" />
+						value="<%=clienteFormulario.getMetaPaginasDia()%>"
+						id="txtMetaDiaria" name="txtMetaDiaria" />
 				</div>
 				<div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
 					<label>BarCode</label> <select class="form-control lista"
 						id="txtBarcode" name="txtBarcode" required>
 						<option value=0>Selecione</option>
+						<%
+							for (TipoCodigoBarra tipoCodigoBarra : listaTipoCodigoBarra) {
+						%>
+						<option value="<%=tipoCodigoBarra.getIdTipoCodigoBarra()%>">
+						<%=tipoCodigoBarra.getDescricaoTipoCodigoBarra()%></option>
+						<%
+							}
+						%>
 					</select>
 				</div>
 			</div>

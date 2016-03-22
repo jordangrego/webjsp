@@ -61,7 +61,6 @@
 		if (form.getIdUsuario() == 0) {
 			try {
 				negocio.inserir(form);
-				System.out.println("Aff");
 				//Aqui ele pega o id do Perfil e vai gravando
 				String perfis[] = request.getParameterValues("perfis");
 				for (int i = 0; i < perfis.length; i++) {

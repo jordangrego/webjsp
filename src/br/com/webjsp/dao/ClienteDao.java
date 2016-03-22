@@ -1,5 +1,8 @@
 package br.com.webjsp.dao;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,6 +10,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import org.apache.tomcat.jni.File;
 
 import br.com.webjsp.entidade.Cliente;
 
@@ -29,10 +34,10 @@ public class ClienteDao extends AbstractDao {
 		this.comandoSQL = conexao.prepareStatement(
 				"INSERT INTO public.cliente(id_cliente, id_usuario, razao_social, email_cliente, cnpj, data_hora, qtd_caixa_padrao, existe_caixa_triplex, perc_aprovacao, tamanho_numero_caixa, logo, fundo_espelho, id_tipo_codigo_barra, prazo_entrega, meta_paginas_dia, paginas_total_contrato) VALUES (NEXTVAL('cliente_id_cliente_seq'), 1,'"
 						+ cliente.getRazaoSocial() + "', '" + cliente.getEmailCliente() + "', '" + cliente.getCnpj()
-						+ "', '" + dataFormatada.format(data) + "', " + cliente.getQtdCaixaPadrao() + ", " + cliente.isExisteCaixaTriplex()
-						+ ", " + cliente.getPercAprovacao() + ", " + cliente.getTamanhoNumeroCaixa() + ", "
-						+ cliente.getLogo() + ", " + cliente.getFundoEspelho() + ", "
-						+ cliente.getIdTipoCodigoBarra() + " , " + cliente.getPrazo_entrega() + " , "
+						+ "', '" + dataFormatada.format(data) + "', " + cliente.getQtdCaixaPadrao() + ", "
+						+ cliente.isExisteCaixaTriplex() + ", " + cliente.getPercAprovacao() + ", "
+						+ cliente.getTamanhoNumeroCaixa() + ", " + cliente.getLogo() + ", " + cliente.getFundoEspelho()
+						+ ", " + cliente.getIdTipoCodigoBarra() + " , " + cliente.getPrazo_entrega() + " , "
 						+ cliente.getMetaPaginasDia() + ", " + cliente.getPaginas_total_contrato() + " );");
 		comandoSQL.execute();
 
@@ -179,7 +184,7 @@ public class ClienteDao extends AbstractDao {
 
 		return listaRetorno;
 	}
-	
+
 	public void gravaLogo(byte[] imagem, long idCliente) {
 		try {
 			PreparedStatement ps = conexao.prepareStatement("update public.cliente set logo=? where id_cliente = ?");
@@ -192,13 +197,13 @@ public class ClienteDao extends AbstractDao {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public byte[] recuperaLogo(long idCliente) {
 		try {
 			PreparedStatement ps = conexao.prepareStatement("select logo from public.cliente where id_cliente = ?");
 			ps.setLong(1, idCliente);
 			this.comandoSQL = ps;
-			
+
 			ResultSet resultadoSql = comandoSQL.executeQuery();
 
 			while (resultadoSql.next()) {
@@ -210,8 +215,8 @@ public class ClienteDao extends AbstractDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return null;
 	}
-	
+
 }

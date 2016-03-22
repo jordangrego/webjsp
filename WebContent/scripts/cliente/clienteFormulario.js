@@ -18,8 +18,8 @@ $(function() {
 			
 			});
 
-	/*$('#btnSalvar').click(function() {
-		validarForm()
-	});*/
+	$('#btnSalvar').click(function() {
+		document.getElementById("formCliente").submit();
+	});
 
 });
