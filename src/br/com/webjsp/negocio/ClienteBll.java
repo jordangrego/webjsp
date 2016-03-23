@@ -71,7 +71,6 @@ public class ClienteBll {
 	
 	public void gravaLogo(byte[] imagem, long idCliente) {
 		this.clienteDao.gravaLogo(imagem, idCliente);
-
 	}
 	
 	public byte[] recuperaLogo(long idCliente) {

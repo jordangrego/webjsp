@@ -1,8 +1,5 @@
 package br.com.webjsp.dao;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,8 +7,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import org.apache.tomcat.jni.File;
 
 import br.com.webjsp.entidade.Cliente;
 
@@ -59,12 +54,18 @@ public class ClienteDao extends AbstractDao {
 	 * @throws SQLException
 	 */
 	public void alterar(Cliente cliente) throws SQLException {
-		/*
-		 * this.comandoSQL = conexao.prepareStatement(
-		 * "UPDATE public.tipo_dado set descricao_tipo = '" +
-		 * lote.getDescricaoTipoDado() + "' where id_tipo_dado = " +
-		 * lote.getIdTipoDado()); comandoSQL.execute();
-		 */
+
+		this.comandoSQL = conexao.prepareStatement("UPDATE public.cliente SET razao_social='" + cliente.getRazaoSocial()
+				+ "', email_cliente='" + cliente.getEmailCliente() + "', cnpj='" + cliente.getCnpj()
+				+ "', qtd_caixa_padrao=" + cliente.getQtdCaixaPadrao() + ", existe_caixa_triplex="
+				+ cliente.isExisteCaixaTriplex() + ", perc_aprovacao=" + cliente.getPercAprovacao()
+				+ ", tamanho_numero_caixa=" + cliente.getTamanhoNumeroCaixa() + ", logo='" + cliente.getLogo()
+				+ "', fundo_espelho='" + cliente.getFundoEspelho() + "', id_tipo_codigo_barra="
+				+ cliente.getIdTipoCodigoBarra() + ", prazo_entrega=" + cliente.getPrazo_entrega()
+				+ ", meta_paginas_dia=" + cliente.getMetaPaginasDia() + ", paginas_total_contrato="
+				+ cliente.getPaginas_total_contrato() + " WHERE id_cliente=" + cliente.getIdCliente() + ";");
+		comandoSQL.execute();
+
 	}
 
 	/**
@@ -89,10 +90,7 @@ public class ClienteDao extends AbstractDao {
 		Cliente clienteRetorno = null;
 
 		StringBuilder sql = new StringBuilder();
-		sql.append("SELECT id_cliente, id_usuario, razao_social, email_cliente, cnpj, data_hora, ");
-		sql.append(" qtd_caixa_padrao, existe_caixa_triplex, perc_aprovacao, tamanho_numero_caixa,  ");
-		sql.append(" logo, fundo_espelho, id_tipo_codigo_barra, prazo_entrega, meta_paginas_dia, ");
-		sql.append(" paginas_total_contrato");
+		sql.append("SELECT * ");
 		sql.append(" FROM public.cliente");
 		sql.append(" where ");
 		sql.append(" id_cliente = " + idCliente);
@@ -105,12 +103,19 @@ public class ClienteDao extends AbstractDao {
 			clienteRetorno.setIdCliente(resultadoSql.getInt("id_cliente"));
 			clienteRetorno.setIdUsuario(resultadoSql.getInt("id_usuario"));
 			clienteRetorno.setRazaoSocial(resultadoSql.getString("razao_social"));
-			clienteRetorno.setCnpj(resultadoSql.getString("cnpj"));
 			clienteRetorno.setEmailCliente(resultadoSql.getString("email_cliente"));
+			clienteRetorno.setCnpj(resultadoSql.getString("cnpj"));			
 			clienteRetorno.setDataHora(resultadoSql.getDate("data_hora"));
 			clienteRetorno.setQtdCaixaPadrao(resultadoSql.getInt("qtd_caixa_padrao"));
 			clienteRetorno.setExisteCaixaTriplex(resultadoSql.getBoolean("existe_caixa_triplex"));
 			clienteRetorno.setPercAprovacao(resultadoSql.getInt("perc_aprovacao"));
+			clienteRetorno.setTamanhoNumeroCaixa((resultadoSql.getInt("tamanho_numero_caixa")));
+			//clienteRetorno.setLogo((resultadoSql.getBlob("logo")));
+			//clienteRetorno.setFundoEspelho((resultadoSql.getBlob("fundo_espelho")));
+			clienteRetorno.setIdTipoCodigoBarra(resultadoSql.getInt("id_tipo_codigo_barra"));
+			clienteRetorno.setPrazo_entrega(resultadoSql.getInt("prazo_entrega"));
+			clienteRetorno.setMetaPaginasDia(resultadoSql.getInt("meta_paginas_dia"));
+			clienteRetorno.setPrazo_entrega(resultadoSql.getInt("paginas_total_contrato"));
 		}
 
 		return clienteRetorno;

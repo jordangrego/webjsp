@@ -24,20 +24,21 @@
 		String txtRazaoSocial = request.getParameter("txtRazaoSocial");
 		String txtEmailCliente = request.getParameter("txtEmailCliente");
 		String txtCnpj = request.getParameter("txtCNPJ");
-		String imgLogo =  request.getParameter("fileLogo");
-		Part filePart = request.getPart("fileLogo");
-	   //	InputStream is = new FileInputStream(filePart);
-	   	System.out.println(filePart);
+		String imgLogo = request.getParameter("fileLogo");
+		//Part filePart = request.getPart("fileLogo");
+		//	InputStream is = new FileInputStream(filePart);
+
 		String imgFundoEspelho = request.getParameter("fileFundoEspelho");
 		int txtQtdCaixaPadrao = Integer.parseInt(request.getParameter("txtQtdCaixaBoxLote"));
-		boolean isExisteCaixaTriplex = Boolean.parseBoolean(request.getParameter("checkCaixaTriplex"));
+		boolean isExisteCaixaTriplex = request.getParameter("checkCaixaTriplex") != null;
 		int txtPercAprovacao = Integer.parseInt(request.getParameter("txtMinAprov"));
 		int txtPrazoEntrega = Integer.parseInt(request.getParameter("txtPrazoEntrega"));
 		int txtPaginasTotalContrato = Integer.parseInt(request.getParameter("txtQtdPagTotaisContrato"));
 		int txtMetaPaginasDia = Integer.parseInt(request.getParameter("txtMetaDiaria"));
 
 		int txtIdTipoCodigoBarra = Integer.parseInt(request.getParameter("txtBarcode"));
-
+		
+		form.setIdCliente(Integer.parseInt(request.getParameter("hdnIdCliente").toString()));
 		form.setRazaoSocial(txtRazaoSocial);
 		form.setEmailCliente(txtEmailCliente);
 		form.setCnpj(txtCnpj);
@@ -51,19 +52,19 @@
 		form.setMetaPaginasDia(txtMetaPaginasDia);
 		form.setIdTipoCodigoBarra(txtIdTipoCodigoBarra);
 		form.setDataHora(date);
-		
-		if(form.getIdUsuario() == 0) {
+
+		if (form.getIdCliente() == 0) {
 			negocio.inserir(form);
 		} else {
-			
+			negocio.alterar(form);
 		}
 	}
 
 	if (request.getParameter("idCliente") != null) {
-		// é update pois passou idUsuario
-		//usuarioFormulario = new UsuarioBll()
-		//.recuperar(Integer.parseInt(request.getParameter("idUsuario").toString()));
-	} else {		
+		// é update pois passou idCliente
+		clienteFormulario = new ClienteBll()
+				.recuperar(Integer.parseInt(request.getParameter("idCliente").toString()));
+	} else {
 		clienteFormulario = new Cliente();
 		clienteFormulario.setRazaoSocial("");
 		clienteFormulario.setEmailCliente("");
@@ -71,12 +72,24 @@
 	}
 %>
 <div class="panel panel-default">
+	<%
+		if (request.getParameter("idCliente") == null) {
+	%>
 	<div class="panel-heading">
 		<h3 class="panel-title">Cadastrar Cliente</h3>
 	</div>
+	<%
+		} else {
+	%>
+	<div class="panel-heading">
+		<h3 class="panel-title">Alterar Cliente</h3>
+	</div>
+	<%
+		}
+	%>
 	<div class="panel-body">
-		<form class="form-horizontal" name="formCliente" id="formCliente" 
-			method="POST" >
+		<form class="form-horizontal" name="formCliente" id="formCliente"
+			method="POST">
 			<input type="hidden" id="hdnIdCliente" name="hdnIdCliente"
 				value="<%=clienteFormulario.getIdCliente()%>" />
 			<div class="form-group row">
@@ -160,8 +173,8 @@
 						<%
 							for (TipoCodigoBarra tipoCodigoBarra : listaTipoCodigoBarra) {
 						%>
-						<option value="<%=tipoCodigoBarra.getIdTipoCodigoBarra()%>">
-						<%=tipoCodigoBarra.getDescricaoTipoCodigoBarra()%></option>
+						<option value="<%=tipoCodigoBarra.getIdTipoCodigoBarra()%>" <%if(tipoCodigoBarra.getIdTipoCodigoBarra() == clienteFormulario.getIdTipoCodigoBarra()){ out.println("selected=\"selected\""); } %>>
+							<%=tipoCodigoBarra.getDescricaoTipoCodigoBarra()%></option>
 						<%
 							}
 						%>
