@@ -59,7 +59,7 @@ public class ClienteDao extends AbstractDao {
 				+ "', email_cliente='" + cliente.getEmailCliente() + "', cnpj='" + cliente.getCnpj()
 				+ "', qtd_caixa_padrao=" + cliente.getQtdCaixaPadrao() + ", existe_caixa_triplex="
 				+ cliente.isExisteCaixaTriplex() + ", perc_aprovacao=" + cliente.getPercAprovacao()
-				+ ", tamanho_numero_caixa=" + cliente.getTamanhoNumeroCaixa() + ", logo='" + cliente.getLogo()
+				+ ", logo='" + cliente.getLogo()
 				+ "', fundo_espelho='" + cliente.getFundoEspelho() + "', id_tipo_codigo_barra="
 				+ cliente.getIdTipoCodigoBarra() + ", prazo_entrega=" + cliente.getPrazo_entrega()
 				+ ", meta_paginas_dia=" + cliente.getMetaPaginasDia() + ", paginas_total_contrato="
@@ -115,7 +115,7 @@ public class ClienteDao extends AbstractDao {
 			clienteRetorno.setIdTipoCodigoBarra(resultadoSql.getInt("id_tipo_codigo_barra"));
 			clienteRetorno.setPrazo_entrega(resultadoSql.getInt("prazo_entrega"));
 			clienteRetorno.setMetaPaginasDia(resultadoSql.getInt("meta_paginas_dia"));
-			clienteRetorno.setPrazo_entrega(resultadoSql.getInt("paginas_total_contrato"));
+			clienteRetorno.setPaginas_total_contrato(resultadoSql.getInt("paginas_total_contrato"));
 		}
 
 		return clienteRetorno;

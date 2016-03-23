@@ -44,12 +44,12 @@ $(function() {
 						$(this).next().remove();
 						if (valor === null || valor === "") {
 
-							if ($(this).next().html === "Campo Obrigatório") {
+							if ($(this).next().html === "Campo obrigatório") {
 
 							} else {
 								$(this)
 										.after(
-												"<span class='help-block'>Campo Obrigatório</span>");
+												"<span class='help-block'>Campo obrigatório</span>");
 
 								adicionaClass($(this).parent(), 'has-error');
 							}
@@ -141,6 +141,11 @@ function executaGrid() {
 	});
 }
 
+function adicionaClass(campo, novoClass) {
+	var classAtual = campo.prop('class');
+	classAtual = classAtual + ' ' + novoClass;
+	campo.prop('class', classAtual);
+}
 /*
  * TABLE SORTER
  * -----------------------------------------------------------------------------------------

@@ -4,6 +4,7 @@
 <link href="/webjsp/styles/site.css" rel="stylesheet" />
 
 <script type="text/javascript" src="/webjsp/scripts/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/webjsp/scripts/maskedinput-1.3.js"></script>
 <script type="text/javascript" src="/webjsp/scripts/jquery.tablesorter.min.js"></script>
 <script type="text/javascript" src="/webjsp/scripts/jquery.tablesorter.widgets.js"></script>
 <script type="text/javascript" src="/webjsp/scripts/jquery.tablesorter.pager.js"></script>
