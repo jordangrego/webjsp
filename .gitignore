@@ -47,5 +47,3 @@ local.properties
 
 # Code Recommenders
 .recommenders/
-.classpath
-src/br/com/webjsp/dao/AbstractDao.java
