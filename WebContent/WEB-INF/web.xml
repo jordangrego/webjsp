@@ -27,6 +27,10 @@
 		<servlet-name>RetornaImagemServlet</servlet-name>
 		<servlet-class>br.com.webjsp.servlets.ajax.RetornaImagemServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>ManterClassificacaoServlet</servlet-name>
+		<servlet-class>br.com.webjsp.servlets.ajax.ManterClassificacaoServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>listaCidadeServlet</servlet-name>
 		<url-pattern>/ListaCidadesServlet</url-pattern>
@@ -46,5 +50,9 @@
 	<servlet-mapping>
 		<servlet-name>RetornaImagemServlet</servlet-name>
 		<url-pattern>/RetornaImagemServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ManterClassificacaoServlet</servlet-name>
+		<url-pattern>/ManterClassificacaoServlet</url-pattern>
 	</servlet-mapping>
 </web-app>

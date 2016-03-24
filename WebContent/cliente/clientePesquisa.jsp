@@ -11,7 +11,7 @@
 		<form class="form-inline">
 			<div class="form-group">
 				<label>Nome do Cliente</label> <input type="text"
-					class="form-control numero" id="txtNomeCliente" />
+					class="form-control" id="txtNomeCliente" />
 			</div>
 				<button id="btnCadastrar" type="button"
 					class="btn btn-default">Cadastrar</button>
