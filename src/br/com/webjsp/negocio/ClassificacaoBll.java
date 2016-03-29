@@ -34,4 +34,11 @@ public class ClassificacaoBll {
 		return listaClassificacao;
 	}
 	
+	public void inserir (Classificacao classificacao) throws SQLException{
+		this.classificacaoDao.inserir(classificacao);
+	}
+	
+	public Classificacao recuperar (int idClassificacao) throws SQLException{
+		return this.classificacaoDao.recuperar(idClassificacao);		
+	}
 }

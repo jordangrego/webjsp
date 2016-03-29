@@ -6,13 +6,17 @@ $(function() {
 		pesquisarClassificacao();
 	});
 	
+	$('#btnCadastrar').click(function() {
+		$(window).attr('location', '/webjsp/classificacao/classificacaoFormulario.jsp')
+	});
+	
 });
 function pesquisarClassificacao() {
 	removeRows();
 
 	$.ajax({
 				url : "/webjsp/ManterClassificacaoServlet",
-				data : "nome_cliente=" + $('#txtNomeCliente').val() + "&codigo=" + $('#txtCodigo').val() + "&descricao=" + $('#txtDescricao').val(),
+				data : "nome_cliente=" + $('#ddlCliente').val() + "&codigo=" + $('#txtCodigo').val() + "&descricao=" + $('#txtDescricao').val(),
 				dataType : "json",
 				type : "GET",
 				success : function(data) {

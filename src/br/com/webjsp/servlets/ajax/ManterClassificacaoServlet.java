@@ -18,8 +18,8 @@ public class ManterClassificacaoServlet extends HttpServlet {
 		try {
 			Classificacao classificacaoCriterio = new Classificacao();
 
-			if (request.getParameter("id_cliente") != null && request.getParameter("id_cliente") != "") {
-				int idCliente = Integer.parseInt(request.getParameter("id_cliente"));
+			if (request.getParameterValues("nome_cliente") != null) {
+				int idCliente = Integer.parseInt(request.getParameter("nome_cliente"));
 				classificacaoCriterio.setIdCliente(idCliente);
 			}
 			if (request.getParameter("codigo") != null && request.getParameter("codigo") != "") {

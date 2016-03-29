@@ -14,8 +14,9 @@
 	<div class="panel-body">
 		<form class="form-inline">
 			<div class="form-group">
-				<label>Cliente</label> <select class="form-control lista"
+				<label>Cliente</label> <select class="form-control"
 					id="ddlCliente" name="txtCliente">
+					<option value=0>Selecione</option>
 					<%
 						for (Cliente cliente : listaCliente) {
 					%>
